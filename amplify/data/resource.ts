@@ -12,6 +12,13 @@ const schema = a.schema({
       content: a.string(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
+  Idea: a.model({
+    email: a.string().required(),
+    idea: a.string(),
+    ideaSummary: a.string(),
+    customers: a.string(),
+    customersSummary: a.string(),
+  }),
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -21,7 +28,7 @@ export const data = defineData({
   authorizationModes: {
     defaultAuthorizationMode: "apiKey",
     apiKeyAuthorizationMode: {
-      expiresInDays: 30,
+      expiresInDays: 365,
     },
   },
 });

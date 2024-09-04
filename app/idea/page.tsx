@@ -3,35 +3,45 @@ import { useLLM } from "llmasaservice-client";
 import React, { useEffect, useState } from "react";
 import Markdown from "react-markdown";
 import { useRouter } from "next/navigation";
+import { generateClient } from "aws-amplify/data";
+import type { Schema } from "@/amplify/data/resource";
 
 const Page: React.FC = () => {
   const router = useRouter();
+  const client = generateClient<Schema>();
+
   const [ideaText, setIdeaText] = useState("");
-
-  const [ideaSummary, setIdeaSummary] = useState("");
-
-  const [email, setEmail] = useState("");
+  const [idea, setIdea] = useState<Schema["Idea"]["type"] | null>(null);
 
   useEffect(() => {
-    const email = localStorage.getItem("sp-email") ?? "";
-    if (!email) {
+    const ideaid = localStorage.getItem("sp-idea-id") ?? "";
+    if (!ideaid) {
       router.push("/");
+      return;
     }
 
-    setEmail(email);
+    const fetchIdea = async () => {
+      try {
+        const result = await client.models.Idea.get({ id: ideaid });
+        if (!result || !result.data) {
+          router.push("/");
+        } else {
+          setIdea(result.data as Schema["Idea"]["type"]);
+          setIdeaText(result.data.idea ?? "");
+        }
+      } catch (error) {
+        router.push("/");
+      }
+    };
 
-    const ideaText = localStorage.getItem("sp-idea");
-    setIdeaText(ideaText ?? "");
-
-    const ideaSummary = localStorage.getItem("sp-ideaSummary");
-    setIdeaSummary(ideaSummary ?? "");
-  }, [router]);
+    fetchIdea();
+  }, []);
 
   const { response, idle, send } = useLLM({
     project_id: "379aeb32-8de9-4854-af83-1a0796d1fcd0",
     customer: {
-      customer_id: email,
-      customer_name: email,
+      customer_id: idea?.email ?? "",
+      customer_name: idea?.email ?? "",
     },
   });
 
@@ -49,19 +59,23 @@ const Page: React.FC = () => {
     send(prompt);
   };
 
-  const handleConfirm = () => {
-    localStorage.setItem("sp-idea", ideaText);
-    localStorage.setItem("sp-ideaSummary", response);
+  const handleConfirm = async () => {
+    client.models.Idea.update({
+      id: idea?.id ?? "",
+      idea: ideaText,
+      ideaSummary:
+        response && response.length > 0 ? response : idea?.ideaSummary,
+    });
+
     router.push("/customers");
   };
 
   const handleSillyIdea = async () => {
     const idea = await send(
-      "Create a single sentence comical business idea",
+      "Create a one or two sentence comical business idea",
       [],
       false
     );
-    console.log("idea:", idea);
     setIdeaText(idea);
   };
 
@@ -120,16 +134,29 @@ const Page: React.FC = () => {
             </button>
           </div>
         </div>
-        {(response.length > 0 || ideaSummary.length > 0) && (
+        {(response.length > 0 ||
+          (idea?.ideaSummary && idea?.ideaSummary.length > 0)) && (
           <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl mt-8">
             <div className="mb-4">
-              <h1 className="text-l font-bold text-white">Puddle Shark</h1>
+              <div className="flex items-center">
+                <img
+                  src="sharkpuddle.png"
+                  alt="Shark Puddle Icon"
+                  className="w-11 h-11 mr-2"
+                />
+                <h1 className="text-l font-bold text-white">Puddle Shark</h1>
+              </div>
               <p className="text-gray-300">
                 OK, let me summarize what you said. Did I understand you?
+                <br />
               </p>
               <p className="text-white">
                 <Markdown className="prose prose-sm !max-w-none dark:prose-invert">
-                  {response.length > 0 ? response : ideaSummary}
+                  {response.length > 0
+                    ? response
+                    : idea?.ideaSummary && idea?.ideaSummary.length > 0
+                    ? idea?.ideaSummary
+                    : ""}
                 </Markdown>
               </p>
             </div>

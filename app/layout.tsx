@@ -69,26 +69,28 @@ export default function RootLayout({
                 </li>
                 <li className="mb-2">
                   <Link
-                    href="/value-proposition"
+                    href="/value"
                     className="text-gray-400 hover:text-white"
                   >
                     3. Unique value prop
                   </Link>
                 </li>
+               
                 <li className="mb-2">
                   <Link
-                    href="/revenue"
+                    href="/sharks"
                     className="text-gray-400 hover:text-white"
                   >
-                    4. Revenue and market size
+                    4. Shark critiques
                   </Link>
                 </li>
+
                 <li className="mb-2">
                   <Link
-                    href="/shark-critiques"
+                    href="/share"
                     className="text-gray-400 hover:text-white"
                   >
-                    5. Shark critiques
+                    5. Share your pitch
                   </Link>
                 </li>
               </ul>

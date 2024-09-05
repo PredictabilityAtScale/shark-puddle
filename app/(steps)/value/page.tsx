@@ -116,7 +116,7 @@ Ideal Customers and competitors: "${idea?.customersSummary}."`
     <div className="p-1 bg-black min-h-screen w-full">
       <div className="flex flex-col items-center mt-8">
         <h2 className="text-xl font-bold text-white mb-4">
-          Step 2 - Tell Puddle Shark About Your Unique Value Proposition
+          Step 3 - Tell Puddle Shark About Your Unique Value Proposition
         </h2>
         <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl">
           <div className="mb-4">

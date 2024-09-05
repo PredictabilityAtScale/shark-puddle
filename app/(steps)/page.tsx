@@ -5,7 +5,7 @@ import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
 import "./globals.css";
-import Introduction from "../components/Introduction";
+import Introduction from "../../components/Introduction";
 
 Amplify.configure(outputs);
 

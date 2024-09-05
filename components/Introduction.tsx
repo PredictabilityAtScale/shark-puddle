@@ -113,9 +113,9 @@ const Introduction: React.FC = () => {
         </button>
       </div>
       <div className="p-10">
-        {ideasForEmail.length > 0 && <h2>or, Continue an Existing Idea</h2>}
+        {ideasForEmail?.length > 0 && <h2>or, Continue an Existing Idea</h2>}
         <ul>
-          {ideasForEmail.map((idea) => (
+          {ideasForEmail?.map((idea) => (
             <li key={idea.id} className="p-5">
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"

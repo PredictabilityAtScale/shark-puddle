@@ -12,6 +12,9 @@ const Page: React.FC = () => {
   const [idea, setIdea] = useState<Schema["Idea"]["type"] | null>(null);
   
   useEffect(() => {
+
+    
+    /*
     const ideaid = localStorage.getItem("sp-idea-id") ?? "";
     if (!ideaid) {
       router.push("/");
@@ -32,7 +35,7 @@ const Page: React.FC = () => {
       }
     };
 
-    fetchIdea();
+    fetchIdea();*/
   }, []);
 
   const buildSummaryMarkdown = () => {

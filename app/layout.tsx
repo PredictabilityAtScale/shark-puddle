@@ -87,10 +87,10 @@ export default function RootLayout({
 
                 <li className="mb-2">
                   <Link
-                    href="/share"
+                    href="/summary"
                     className="text-gray-400 hover:text-white"
                   >
-                    5. Share your pitch
+                    5. Summary & Share your pitch
                   </Link>
                 </li>
               </ul>

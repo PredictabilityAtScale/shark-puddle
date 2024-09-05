@@ -10,7 +10,7 @@ const Page: React.FC = () => {
   const router = useRouter();
   const client = generateClient<Schema>();
   const [idea, setIdea] = useState<Schema["Idea"]["type"] | null>(null);
-  
+
   useEffect(() => {
     const ideaid = localStorage.getItem("sp-idea-id") ?? "";
     if (!ideaid) {
@@ -36,7 +36,6 @@ const Page: React.FC = () => {
   }, []);
 
   const buildSummaryMarkdown = () => {
-
     if (!idea) {
       return "Iterate through the steps to generate a summary.";
     }
@@ -65,24 +64,50 @@ ${idea.constructiveShark}
 
 ---
 Construct your own whimsical plan at [Shark Puddle](https://shark-puddle.com).
-Build using LLMAsAServcie.io. [Learn more](https://llmasaservice.io)`;
-  }
+Built using LLMAsAServcie.io. [Learn more](https://llmasaservice.io)`;
+  };
 
+  const handleShareLink = () => {
+    const shareUrl =
+      window.location.href.replace("summary", "share") + "/" + idea?.id;
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      alert("Link copied to clipboard!");
+    });
+  };
+
+  const handleShareLinkedIn = () => {
+    const shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+      window.location.href.replace("summary", "share") + "/" + idea?.id
+    )}`;
+    window.open(shareUrl, "_blank");
+  };
 
   return (
     <div className="p-1 bg-black min-h-screen w-full">
       <div className="flex flex-col items-center mt-8">
-        <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl">
-         
-                  <p className="text-white">
-                    <Markdown className="prose prose-sm !max-w-none dark:prose-invert">
-                      {buildSummaryMarkdown()}
-                    </Markdown>
-                  </p>
-      
-          </div>
+        <div className="mt-4 flex space-x-4 p-4">
+          <button
+            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            onClick={handleShareLink}
+          >
+            Share via Link
+          </button>
+          <button
+            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            onClick={handleShareLinkedIn}
+          >
+            Share via LinkedIn
+          </button>
         </div>
-   
+
+        <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl">
+          <p className="text-white">
+            <Markdown className="prose prose-sm !max-w-none dark:prose-invert">
+              {buildSummaryMarkdown()}
+            </Markdown>
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

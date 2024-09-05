@@ -1,12 +1,16 @@
 "use client";
-import { useLLM } from "llmasaservice-client";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Markdown from "react-markdown";
 import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
+import { Amplify } from "aws-amplify";
+import outputs from "@/amplify_outputs.json";
 
-const Page: React.FC = () => {
+const Page: React.FC<{ params: { slug: string } }> = ({ params }) => {
+
+  Amplify.configure(outputs);
+
   const router = useRouter();
   const client = generateClient<Schema>();
   const [idea, setIdea] = useState<Schema["Idea"]["type"] | null>(null);
@@ -14,8 +18,13 @@ const Page: React.FC = () => {
   useEffect(() => {
 
     
-    /*
-    const ideaid = localStorage.getItem("sp-idea-id") ?? "";
+    if (!params.slug) {
+      router.push("/");
+      return;
+    }
+    
+    const ideaid = params.slug;
+    
     if (!ideaid) {
       router.push("/");
       return;
@@ -24,19 +33,19 @@ const Page: React.FC = () => {
     const fetchIdea = async () => {
       try {
         const result = await client.models.Idea.get({ id: ideaid });
-        console.log("result", result);
         if (!result || !result.data) {
           router.push("/");
         } else {
           setIdea(result.data as Schema["Idea"]["type"]);
         }
       } catch (error) {
+        console.error("error", error);
         router.push("/");
       }
     };
 
-    fetchIdea();*/
-  }, []);
+    fetchIdea();
+  }, [router]);
 
   const buildSummaryMarkdown = () => {
 
@@ -68,7 +77,7 @@ ${idea.constructiveShark}
 
 ---
 Construct your own whimsical plan at [Shark Puddle](https://shark-puddle.com).
-Build using LLMAsAServcie.io. [Learn more](https://llmasaservice.io)`;
+Built using LLMAsAServcie.io. [Learn more](https://llmasaservice.io)`;
   }
 
 

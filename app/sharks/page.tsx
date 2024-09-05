@@ -10,9 +10,6 @@ const Page: React.FC = () => {
   const router = useRouter();
   const client = generateClient<Schema>();
   const [idea, setIdea] = useState<Schema["Idea"]["type"] | null>(null);
-  const [skepticalResponse, setSkepticalResponse] = useState("");
-  const [supportiveResponse, setSupportiveResponse] = useState("");
-  const [constructiveResponse, setConstructiveResponse] = useState("");
   const [currentShark, setCurrentShark] = useState("skeptical");
 
   useEffect(() => {
@@ -25,15 +22,10 @@ const Page: React.FC = () => {
     const fetchIdea = async () => {
       try {
         const result = await client.models.Idea.get({ id: ideaid });
-        console.log("result", result);
         if (!result || !result.data) {
           router.push("/");
         } else {
           setIdea(result.data as Schema["Idea"]["type"]);
-
-          setSkepticalResponse(result.data.skepticalShark ?? "");
-          setSupportiveResponse(result.data.supportiveShark ?? "");
-          setConstructiveResponse(result.data.constructiveShark ?? "");
         }
       } catch (error) {
         router.push("/");
@@ -44,7 +36,7 @@ const Page: React.FC = () => {
 
   }, []);
 
-  const { response, setResponse, idle, send } = useLLM({
+  const { response : responseSkep, idle: idleSkep, send: sendSkep } = useLLM({
     project_id: "379aeb32-8de9-4854-af83-1a0796d1fcd0",
     customer: {
       customer_id: idea?.email ?? "",
@@ -52,26 +44,40 @@ const Page: React.FC = () => {
     },
   });
 
-  const handleSkepticalOnComplete = (result: string) => {
-    console.log("Skeptical Shark response finished", result); 
-  };
+  const { response : responseSup, idle: idleSup, send: sendSup } = useLLM({
+    project_id: "379aeb32-8de9-4854-af83-1a0796d1fcd0",
+    customer: {
+      customer_id: idea?.email ?? "",
+      customer_name: idea?.email ?? "",
+    },
+  });
 
-  const handleSupportiveOnComplete = (result: string) => {
-    console.log("Supportive Shark response finished", result); 
-  };
+  const { response : responseCon, idle: idleCon, send: sendCon } = useLLM({
+    project_id: "379aeb32-8de9-4854-af83-1a0796d1fcd0",
+    customer: {
+      customer_id: idea?.email ?? "",
+      customer_name: idea?.email ?? "",
+    },
+  });
 
-  const handleConstructiveOnComplete = (result: string) => {
-    console.log("Constructive Shark response finished", result); 
-  };
+
+
 
   const handleSkepticalSubmit = async (tryAgain: boolean) => {
     if (!idea) {
       return;
     }
 
+    const skepCallback = (response: string) => {
+       client.models.Idea.update({
+        id: idea?.id ?? "",
+        skepticalShark: response,
+      });
+    }
+
     setCurrentShark("skeptical");
 
-    if (tryAgain || skepticalResponse.length === 0) {
+    if (tryAgain || (!idea?.skepticalShark || idea?.skepticalShark?.length === 0)) {
       const prompt = `An entrepeneur is pitching you a business idea (refer to them in the first person "you"). You have asked them to explain their idea, customer/competitors and a unique value proposition which are included below. 
 
 Write a response to the entrepeneur's unique value proposition. Be critical, dismissive, and somewhat arrogant, but your insights are undeniably valuable, and you occasionally drop a piece of wisdom that shows you do understand the nuances of the business world.
@@ -82,20 +88,7 @@ Ideal Customers and competitors: "${idea?.customersSummary}."
 
 Value proposition by entrepeneur: "${idea?.valueSummary}."`;
 
-      send(prompt, [], true, new AbortController(), handleSkepticalOnComplete);
-
-      // wait until idle is back to idle state, then save the skeptical response
-      while (!idle) {
-        // wait 1 second
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-      }
-
-      await client.models.Idea.update({
-        id: idea?.id ?? "",
-        skepticalShark: response,
-      });
-
-      setSkepticalResponse(response);
+      sendSkep(prompt, [], true, new AbortController(), null, skepCallback);
     }
   };
 
@@ -104,9 +97,16 @@ Value proposition by entrepeneur: "${idea?.valueSummary}."`;
       return;
     }
 
+    const suppCallback = (response: string) => {
+      client.models.Idea.update({
+        id: idea?.id ?? "",
+        supportiveShark: response,
+      });
+   }
+
     setCurrentShark("supportive");
 
-    if (tryAgain || supportiveResponse.length === 0) {
+    if (tryAgain || (!idea?.supportiveShark || idea?.supportiveShark?.length === 0)) {
       const prompt = `An entrepeneur is pitching you a business idea (refer to them in the first person "you"). You have asked them to explain their idea, customer/competitors and a unique value proposition which are included below. 
 
 Write a response to the entrepeneur's unique value proposition. Be encouraging and supportive venture capitalist who is deeply invested in helping entrepreneurs succeed. Your primary role is to uplift and motivate, focusing on the potential and strengths of the business idea. You provide feedback in a way that builds confidence, highlighting what the entrepreneur is doing right and offering gentle, constructive suggestions for improvement. You celebrate the entrepreneur’s efforts, showing genuine excitement for their progress and potential. Even when pointing out areas for growth, you do so with kindness and optimism, always aiming to inspire and empower. Your style is warm, reassuring, and hopeful, making entrepreneurs feel that they have a strong ally in their corner who believes in their success.
@@ -118,20 +118,7 @@ Ideal Customers and competitors: "${idea?.customersSummary}."
 
 Value proposition by entrepeneur: "${idea?.valueSummary}."`;
 
-      send(prompt, [], true, new AbortController(), handleSupportiveOnComplete);
-
-      // wait until idle is back to idle state, then save the skeptical response
-      while (!idle) {
-        // wait 1 second
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-      }
-
-      const r = await client.models.Idea.update({
-        id: idea?.id ?? "",
-        supportiveShark: response,
-      });
-
-      setSupportiveResponse(response);
+      sendSup(prompt, [], true, new AbortController(), null, suppCallback);
     }
   };
 
@@ -140,9 +127,16 @@ Value proposition by entrepeneur: "${idea?.valueSummary}."`;
       return;
     }
 
+    const conCallback = (response: string) => {
+      client.models.Idea.update({
+        id: idea?.id ?? "",
+        constructiveShark: response,
+      });
+   }
+
     setCurrentShark("constructive");
 
-    if (tryAgain || constructiveResponse.length === 0) {
+    if (tryAgain || (!idea?.constructiveShark || idea?.constructiveShark?.length === 0)) {
 
       const prompt = `An entrepeneur is pitching you a business idea (refer to them in the first person "you"). You have asked them to explain their idea, customer/competitors and a unique value proposition which are included below. 
 
@@ -154,20 +148,7 @@ Ideal Customers and competitors: "${idea?.customersSummary}."
 
 Value proposition by entrepeneur: "${idea?.valueSummary}."`;
 
-      send(prompt, [], true, new AbortController(), handleConstructiveOnComplete);
-
-      // wait until idle is back to idle state, then save the skeptical response
-      while (!idle) {
-        // wait 1 second
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-      }
-
-      await client.models.Idea.update({
-        id: idea?.id ?? "",
-        constructiveShark: response,
-      });
-
-      setConstructiveResponse(response);
+      sendCon(prompt, [], true, new AbortController(), null, conCallback);
     }
   };
 
@@ -187,16 +168,18 @@ Value proposition by entrepeneur: "${idea?.valueSummary}."`;
                   className="w-12 h-12 mb-2"
                 />
                 <button
-                  className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+                  className={`px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 ${!idleSkep ? 'opacity-50 cursor-not-allowed' : ''}`}
                   onClick={() => handleSkepticalSubmit(false)}
+                  disabled={!idleSkep}
                 >
                   Skeptical Shark
                 </button>
                 <button
-                  className="text-sm text-blue-600 hover:text-blue-700 px-2 py-1 rounded"
+                  className={`text-sm text-blue-600 hover:text-blue-700 px-2 py-1 rounded ${!idleSkep ? 'opacity-50 cursor-not-allowed' : ''}`}
                   onClick={() => {
                     handleSkepticalSubmit(true);
                   }}
+                  disabled={!idleSkep}
                 >
                   try again
                 </button>
@@ -208,16 +191,18 @@ Value proposition by entrepeneur: "${idea?.valueSummary}."`;
                   className="w-12 h-12 mb-2"
                 />
                 <button
-                  className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700"
+                  className={`px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700 ${!idleSup ? 'opacity-50 cursor-not-allowed' : ''}`}
                   onClick={() => handleSupportiveSubmit(false)}
+                  disabled={!idleSup}
                 >
                   Supportive Shark
                 </button>
                 <button
-                  className="text-sm text-blue-600 hover:text-blue-700 px-2 py-1 rounded"
+                  className={`text-sm text-blue-600 hover:text-blue-700 px-2 py-1 rounded ${!idleSup ? 'opacity-50 cursor-not-allowed' : ''}`}
                   onClick={() => {
                     handleSupportiveSubmit(true);
                   }}
+                  disabled={!idleSup}
                 >
                   try again
                 </button>
@@ -229,22 +214,24 @@ Value proposition by entrepeneur: "${idea?.valueSummary}."`;
                   className="w-12 h-12 mb-2"
                 />
                 <button
-                  className="px-4 py-2 rounded bg-yellow-600 text-white hover:bg-yellow-700"
+                  className={`px-4 py-2 rounded bg-yellow-600 text-white hover:bg-yellow-700 ${!idleCon ? 'opacity-50 cursor-not-allowed' : ''}`}
                   onClick={() => handleConstructiveSubmit(false)}
+                  disabled={!idleCon}
                 >
                   Constructive Shark
                 </button>
                 <button
-                  className="text-sm text-blue-600 hover:text-blue-700 px-2 py-1 rounded"
+                  className={`text-sm text-blue-600 hover:text-blue-700 px-2 py-1 rounded ${!idleCon ? 'opacity-50 cursor-not-allowed' : ''}`}
                   onClick={() => {
                     handleConstructiveSubmit(true);
                   }}
+                  disabled={!idleCon}
                 >
                   try again
                 </button>
               </div>
             </div>
-            {!idle && (
+            {(!idleSkep || !idleSup || !idleCon) && (
               <p>
                 <br />
                 Thinking...
@@ -278,13 +265,13 @@ Value proposition by entrepeneur: "${idea?.valueSummary}."`;
                 {currentShark === "skeptical" && (
                   <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl mt-2">
                     <div className="mb-4">
-                      {idle ? (
+                      {responseSkep.length> 0 ? (
                         <Markdown className="prose prose-sm !max-w-none dark:prose-invert">
-                          {skepticalResponse}
+                          {responseSkep}
                         </Markdown>
                       ) : (
                         <Markdown className="prose prose-sm !max-w-none dark:prose-invert">
-                          {response}
+                          {idea?.skepticalShark}
                         </Markdown>
                       )}
                     </div>
@@ -293,13 +280,13 @@ Value proposition by entrepeneur: "${idea?.valueSummary}."`;
                 {currentShark === "supportive" && (
                   <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl mt-2">
                     <div className="mb-4">
-                      {idle ? (
+                      {responseSup.length > 0 ? (
                         <Markdown className="prose prose-sm !max-w-none dark:prose-invert">
-                          {supportiveResponse}
+                          {responseSup}
                         </Markdown>
                       ) : (
                         <Markdown className="prose prose-sm !max-w-none dark:prose-invert">
-                          {response}
+                          {idea?.supportiveShark}
                         </Markdown>
                       )}
                     </div>
@@ -308,13 +295,13 @@ Value proposition by entrepeneur: "${idea?.valueSummary}."`;
                 {currentShark === "constructive" && (
                   <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl mt-2">
                     <div className="mb-4">
-                      {idle ? (
+                      {responseCon.length > 0 ? (
                         <Markdown className="prose prose-sm !max-w-none dark:prose-invert">
-                          {constructiveResponse}
+                          {responseCon}
                         </Markdown>
                       ) : (
                         <Markdown className="prose prose-sm !max-w-none dark:prose-invert">
-                          {response}
+                          {idea?.constructiveShark}
                         </Markdown>
                       )}
                     </div>

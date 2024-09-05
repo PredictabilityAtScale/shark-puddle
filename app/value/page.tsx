@@ -90,7 +90,7 @@ Value proposition by entrepeneur: "${valueText}."`;
       valueSummary: response && response.length > 0 ? response : idea?.valueSummary,
     });
 
-    router.push("/summary");
+    router.push("/sharks");
   };
 
   const handleCreateValueProp = async () => {

@@ -30,6 +30,10 @@ const Page: React.FC = () => {
           router.push("/");
         } else {
           setIdea(result.data as Schema["Idea"]["type"]);
+
+          setSkepticalResponse(result.data.skepticalShark ?? "");
+          setSupportiveResponse(result.data.supportiveShark ?? "");
+          setConstructiveResponse(result.data.constructiveShark ?? "");
         }
       } catch (error) {
         router.push("/");
@@ -37,6 +41,7 @@ const Page: React.FC = () => {
     };
 
     fetchIdea();
+
   }, []);
 
   const { response, setResponse, idle, send } = useLLM({
@@ -48,8 +53,15 @@ const Page: React.FC = () => {
   });
 
   const handleSkepticalOnComplete = (result: string) => {
-    setSkepticalResponse(result);
-    console.log("skeptical response complete", result);
+    console.log("Skeptical Shark response finished", result); 
+  };
+
+  const handleSupportiveOnComplete = (result: string) => {
+    console.log("Supportive Shark response finished", result); 
+  };
+
+  const handleConstructiveOnComplete = (result: string) => {
+    console.log("Constructive Shark response finished", result); 
   };
 
   const handleSkepticalSubmit = async (tryAgain: boolean) => {
@@ -59,12 +71,7 @@ const Page: React.FC = () => {
 
     setCurrentShark("skeptical");
 
-    if (!tryAgain) {
-      if (idea?.skepticalShark && idea?.skepticalShark.length > 0) {
-        setSkepticalResponse(idea.skepticalShark);
-        return;
-      }
-    } else {
+    if (tryAgain || skepticalResponse.length === 0) {
       const prompt = `An entrepeneur is pitching you a business idea (refer to them in the first person "you"). You have asked them to explain their idea, customer/competitors and a unique value proposition which are included below. 
 
 Write a response to the entrepeneur's unique value proposition. Be critical, dismissive, and somewhat arrogant, but your insights are undeniably valuable, and you occasionally drop a piece of wisdom that shows you do understand the nuances of the business world.
@@ -99,12 +106,7 @@ Value proposition by entrepeneur: "${idea?.valueSummary}."`;
 
     setCurrentShark("supportive");
 
-    if (!tryAgain) {
-      if (idea?.supportiveShark && idea?.supportiveShark.length > 0) {
-        setSupportiveResponse(idea.supportiveShark);
-        return;
-      }
-    } else {
+    if (tryAgain || supportiveResponse.length === 0) {
       const prompt = `An entrepeneur is pitching you a business idea (refer to them in the first person "you"). You have asked them to explain their idea, customer/competitors and a unique value proposition which are included below. 
 
 Write a response to the entrepeneur's unique value proposition. Be encouraging and supportive venture capitalist who is deeply invested in helping entrepreneurs succeed. Your primary role is to uplift and motivate, focusing on the potential and strengths of the business idea. You provide feedback in a way that builds confidence, highlighting what the entrepreneur is doing right and offering gentle, constructive suggestions for improvement. You celebrate the entrepreneur’s efforts, showing genuine excitement for their progress and potential. Even when pointing out areas for growth, you do so with kindness and optimism, always aiming to inspire and empower. Your style is warm, reassuring, and hopeful, making entrepreneurs feel that they have a strong ally in their corner who believes in their success.
@@ -116,7 +118,7 @@ Ideal Customers and competitors: "${idea?.customersSummary}."
 
 Value proposition by entrepeneur: "${idea?.valueSummary}."`;
 
-      send(prompt);
+      send(prompt, [], true, new AbortController(), handleSupportiveOnComplete);
 
       // wait until idle is back to idle state, then save the skeptical response
       while (!idle) {
@@ -140,11 +142,8 @@ Value proposition by entrepeneur: "${idea?.valueSummary}."`;
 
     setCurrentShark("constructive");
 
-    if (!tryAgain) {
-      if (idea?.constructiveShark && idea?.constructiveShark.length > 0) {
-        setConstructiveResponse(idea.constructiveShark);
-      }
-    } else {
+    if (tryAgain || constructiveResponse.length === 0) {
+
       const prompt = `An entrepeneur is pitching you a business idea (refer to them in the first person "you"). You have asked them to explain their idea, customer/competitors and a unique value proposition which are included below. 
 
 Write a response to the entrepeneur's unique value proposition. Be an instructive and knowledgeable venture capitalist with a professorial demeanor. Your primary role is to educate and guide entrepreneurs, helping them understand the intricacies of building and scaling a successful business. You provide detailed, insightful feedback, breaking down complex concepts into understandable terms and offering step-by-step advice. Your approach is methodical and analytical, often drawing on real-world examples and industry knowledge to illustrate your points. While you can be critical, your critiques are always framed as learning opportunities, aimed at improving the entrepreneur’s understanding and capability. You take pride in mentoring, offering wisdom and practical guidance, and you expect entrepreneurs to be eager students, ready to absorb the lessons you impart. Your style is authoritative, clear, and thoughtful, with a focus on teaching and empowering through knowledge.
@@ -155,7 +154,7 @@ Ideal Customers and competitors: "${idea?.customersSummary}."
 
 Value proposition by entrepeneur: "${idea?.valueSummary}."`;
 
-      send(prompt);
+      send(prompt, [], true, new AbortController(), handleConstructiveOnComplete);
 
       // wait until idle is back to idle state, then save the skeptical response
       while (!idle) {

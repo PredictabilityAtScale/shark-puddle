@@ -15,7 +15,7 @@ const Page: React.FC = () => {
   useEffect(() => {
     const ideaid = localStorage.getItem("sp-idea-id") ?? "";
     if (!ideaid) {
-      router.refresh()
+      router.refresh();
       router.push("/");
       return;
     }
@@ -27,20 +27,19 @@ const Page: React.FC = () => {
         const result = await client.models.Idea.get({ id: ideaid });
         console.log("result", result);
         if (!result || !result.data) {
-          router.refresh()
+          router.refresh();
           router.push("/");
         } else {
           setIdea(result.data as Schema["Idea"]["type"]);
           setCustomersText(result.data.customers ?? "");
         }
       } catch (error) {
-        router.refresh()
+        router.refresh();
         router.push("/");
       }
     };
 
     fetchIdea();
-    
   }, []);
 
   const { response, idle, send } = useLLM({
@@ -88,7 +87,8 @@ Ideal Customers: "${customersText}."`;
     client.models.Idea.update({
       id: idea?.id ?? "",
       customers: customersText.length > 0 ? customersText : suggestResponse,
-      customersSummary: response && response.length > 0 ? response : idea?.customersSummary,
+      customersSummary:
+        response && response.length > 0 ? response : idea?.customersSummary,
     });
 
     router.push("/value");
@@ -125,12 +125,13 @@ Ideal Customers: "${customersText}."`;
                 alt="Shark Puddle Icon"
                 className="w-11 h-11 mr-2"
               />
-              <h1 className="text-l font-bold text-white">Puddle Shark</h1>
+
+              <p className="text-gray-300">
+                <strong>Puddle Shark: </strong> OK, I'll attempt to expand on
+                what you said, and also identify some competitors you should
+                consider and research.
+              </p>
             </div>
-            <p className="text-gray-300">
-              OK, I get what you are doing, tell me about your ideal customers,
-              who will be looking for your idea to solve their problem and why.
-            </p>
           </div>
           <div className="mb-4">
             <h1 className="text-l font-bold text-white">Small Fish (you)</h1>
@@ -145,7 +146,7 @@ Ideal Customers: "${customersText}."`;
           <div className="flex justify-between">
             <button
               className={`px-6 py-3 rounded hover:bg-blue-700 ${
-                (!idle || !suggestIdle)
+                !idle || !suggestIdle
                   ? "bg-gray-400 text-gray-700 cursor-not-allowed"
                   : "bg-blue-600 text-white hover:bg-yellow-700"
               }`}
@@ -156,14 +157,16 @@ Ideal Customers: "${customersText}."`;
             </button>
             <button
               className={`px-6 py-3 rounded ml-auto ${
-                (!idle || !suggestIdle)
+                !idle || !suggestIdle
                   ? "bg-gray-400 text-gray-700 cursor-not-allowed"
                   : "bg-yellow-600 text-white hover:bg-yellow-700"
               }`}
               onClick={handleCreateCustomerSegments}
               disabled={!idle || !suggestIdle}
             >
-              {idle || suggestIdle ? "Create customer segments for me" : "Thinking..."}
+              {idle || suggestIdle
+                ? "Create customer segments for me"
+                : "Thinking..."}
             </button>
           </div>
         </div>
@@ -171,18 +174,20 @@ Ideal Customers: "${customersText}."`;
           (idea?.customersSummary && idea?.customersSummary.length > 0)) && (
           <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl mt-8">
             <div className="mb-4">
-            <div className="flex items-center">
-              <img
-                src="sharkpuddle.png"
-                alt="Shark Puddle Icon"
-                className="w-11 h-11 mr-2"
-              />
-              <h1 className="text-l font-bold text-white">Puddle Shark</h1>
-            </div>
+              <div className="mb-4 flex items-center">
+                <img
+                  src="sharkpuddle.png"
+                  alt="Shark Puddle Icon"
+                  className="w-11 h-11 mr-2"
+                />
+               
+             
               <p className="text-gray-300">
-                OK, let me summarize what you said. Did I understand you? I am
-                also listing some competitors you should consider.<br />
+              <strong>Puddle Shark: </strong> OK, let me summarize what you said. Did I understand you? I am
+                also listing some competitors you should consider.
+                <br />
               </p>
+              </div>
               <p className="text-white">
                 <Markdown className="prose prose-sm !max-w-none ">
                   {response.length > 0
@@ -200,7 +205,7 @@ Ideal Customers: "${customersText}."`;
                 className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700"
                 onClick={handleConfirm}
               >
-                Yes, that&apos;s it  &gt;
+                Yes, that&apos;s it &gt;
               </button>
               No? let me try again (edit you text above and click Submit again)
             </div>

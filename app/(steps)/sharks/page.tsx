@@ -33,6 +33,10 @@ const Page: React.FC = () => {
     };
 
     fetchIdea();
+
+    if (idea && (!idea?.skepticalShark || idea?.skepticalShark?.length > 0)) {
+      handleSkepticalSubmit(false);
+    }
   }, []);
 
   const {

@@ -93,11 +93,12 @@ const Page: React.FC = () => {
                 alt="Shark Puddle Icon"
                 className="w-11 h-11 mr-2"
               />
-              <h1 className="text-l font-bold text-white">Puddle Shark</h1>
+
+              <p className="text-gray-300">
+                <strong>Puddle Shark: </strong> Nice to meet you. Tell me your
+                idea?
+              </p>
             </div>
-            <p className="text-gray-300">
-              Nice to meet you. Tell me your idea?
-            </p>
           </div>
           <div className="mb-4">
             <h1 className="text-l font-bold text-white">Small Fish (you)</h1>
@@ -138,18 +139,19 @@ const Page: React.FC = () => {
           (idea?.ideaSummary && idea?.ideaSummary.length > 0)) && (
           <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl mt-8">
             <div className="mb-4">
-              <div className="flex items-center">
+              <div className="mb-4 flex items-center">
                 <img
                   src="sharkpuddle.png"
                   alt="Shark Puddle Icon"
                   className="w-11 h-11 mr-2"
                 />
-                <h1 className="text-l font-bold text-white">Puddle Shark</h1>
+
+                <p className="text-gray-300">
+                  <strong>Puddle Shark:</strong> OK, let me summarize what you
+                  said. Did I understand you?
+                  <br />
+                </p>
               </div>
-              <p className="text-gray-300">
-                OK, let me summarize what you said. Did I understand you?
-                <br />
-              </p>
               <p className="text-white">
                 <Markdown className="prose prose-sm !max-w-none">
                   {response.length > 0
@@ -166,7 +168,7 @@ const Page: React.FC = () => {
                 className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700"
                 onClick={handleConfirm}
               >
-                Yes, that&apos;s it  &gt;
+                Yes, that&apos;s it &gt;
               </button>
               No, let me try again (edit you idea above and click Submit again)
             </div>

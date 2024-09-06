@@ -60,7 +60,7 @@ const Page: React.FC = () => {
   };
 
   const handleConfirm = async () => {
-    client.models.Idea.update({
+    await client.models.Idea.update({
       id: idea?.id ?? "",
       idea: ideaText,
       ideaSummary:
@@ -112,7 +112,7 @@ const Page: React.FC = () => {
           </div>
           <div className="flex justify-between">
             <button
-              className={`px-6 py-3 rounded hover:bg-blue-700 ${
+              className={`px-6 py-3 mr-2 rounded hover:bg-blue-700 ${
                 !idle
                   ? "bg-gray-400 text-gray-700 cursor-not-allowed"
                   : "bg-blue-600 text-white hover:bg-yellow-700"
@@ -165,7 +165,7 @@ const Page: React.FC = () => {
 
             <div className="flex justify-between">
               <button
-                className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700"
+                className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 mr-2"
                 onClick={handleConfirm}
               >
                 Yes, that&apos;s it &gt;

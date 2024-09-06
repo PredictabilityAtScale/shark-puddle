@@ -82,8 +82,8 @@ Value proposition by entrepreneur: "${valueText}."`;
     send(prompt);
   };
 
-  const handleConfirm = () => {
-    client.models.Idea.update({
+  const handleConfirm = async () => {
+    await client.models.Idea.update({
       id: idea?.id ?? "",
       value: valueText.length > 0 ? valueText : suggestResponse,
       valueSummary:
@@ -147,7 +147,7 @@ Ideal Customers and competitors: "${idea?.customersSummary}."`
           </div>
           <div className="flex justify-between">
             <button
-              className={`px-6 py-3 rounded hover:bg-blue-700 ${
+              className={`px-6 py-3 mr-2 rounded hover:bg-blue-700 ${
                 !idle || !suggestIdle
                   ? "bg-gray-400 text-gray-700 cursor-not-allowed"
                   : "bg-blue-600 text-white hover:bg-yellow-700"
@@ -173,7 +173,7 @@ Ideal Customers and competitors: "${idea?.customersSummary}."`
           </div>
         </div>
         {(response.length > 0 ||
-          (idea?.customersSummary && idea?.customersSummary.length > 0)) && (
+          (idea?.valueSummary && idea?.valueSummary.length > 0)) && (
           <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl mt-8">
             <div className="mb-4">
               <div className="mb-4 flex items-center">
@@ -202,7 +202,7 @@ Ideal Customers and competitors: "${idea?.customersSummary}."`
 
             <div className="flex justify-between">
               <button
-                className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700"
+                className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 mr-2"
                 onClick={handleConfirm}
               >
                 Yes, that&apos;s it &gt;

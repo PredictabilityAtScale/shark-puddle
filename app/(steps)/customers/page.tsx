@@ -69,6 +69,10 @@ const Page: React.FC = () => {
   };
 
   const handleSubmit = () => {
+
+    console.log("idea", idea);
+
+
     const prompt = `An entrepreneur is pitching you a business idea (refer to them in the first person "you"). You have asked them to explain their idea and ideal customer segments which are included below. 
     
     1. Summarize and augment their customers.  
@@ -83,8 +87,8 @@ Ideal Customers: "${customersText}."`;
     send(prompt);
   };
 
-  const handleConfirm = () => {
-    client.models.Idea.update({
+  const handleConfirm = async () => {
+    await client.models.Idea.update({
       id: idea?.id ?? "",
       customers: customersText.length > 0 ? customersText : suggestResponse,
       customersSummary:
@@ -145,7 +149,7 @@ Ideal Customers: "${customersText}."`;
           </div>
           <div className="flex justify-between">
             <button
-              className={`px-6 py-3 rounded hover:bg-blue-700 ${
+              className={`px-6 py-3 mr-2 rounded hover:bg-blue-700 ${
                 !idle || !suggestIdle
                   ? "bg-gray-400 text-gray-700 cursor-not-allowed"
                   : "bg-blue-600 text-white hover:bg-yellow-700"
@@ -202,7 +206,7 @@ Ideal Customers: "${customersText}."`;
 
             <div className="flex justify-between">
               <button
-                className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700"
+                className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 mr-2"
                 onClick={handleConfirm}
               >
                 Yes, that&apos;s it &gt;

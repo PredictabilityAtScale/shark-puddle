@@ -34,10 +34,19 @@ const Page: React.FC = () => {
 
     fetchIdea();
 
-    if (idea && (!idea?.skepticalShark || idea?.skepticalShark?.length > 0)) {
+
+
+  }, []);
+
+  useEffect(() => {
+    
+    if (!idea) return;
+    if  (localStorage.getItem("sp-idea-id") ?? "" === idea.id) return;
+
+    if (!idea?.skepticalShark || idea?.skepticalShark?.length > 0) {
       handleSkepticalSubmit(false);
     }
-  }, []);
+  }, [idea]);
 
   const {
     response: responseSkep,
@@ -80,8 +89,8 @@ const Page: React.FC = () => {
       return;
     }
 
-    const skepCallback = (response: string) => {
-      client.models.Idea.update({
+    const skepCallback = async (response: string) => {
+      await client.models.Idea.update({
         id: idea?.id ?? "",
         skepticalShark: response,
       });
@@ -120,8 +129,8 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
       return;
     }
 
-    const suppCallback = (response: string) => {
-      client.models.Idea.update({
+    const suppCallback = async (response: string) => {
+      await client.models.Idea.update({
         id: idea?.id ?? "",
         supportiveShark: response,
       });
@@ -161,8 +170,8 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
       return;
     }
 
-    const conCallback = (response: string) => {
-      client.models.Idea.update({
+    const conCallback = async (response: string) => {
+      await client.models.Idea.update({
         id: idea?.id ?? "",
         constructiveShark: response,
       });
@@ -200,7 +209,8 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
     <div className="p-1 bg-black min-h-screen w-full">
       <div className="flex flex-col items-center mt-8">
         <h2 className="text-xl font-bold text-white mb-4">
-          Step 4 - Generate Shark Puddle Critiques and Feedback - Pick a Shark Personality
+          Step 4 - Generate Shark Puddle Critiques and Feedback - Pick a Shark
+          Personality
         </h2>
         <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl">
           <div className="mb-4">
@@ -287,7 +297,13 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
                 </button>
               </div>
               <div>
-              <button className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700 mt-7" onClick={()=>router.push("\summary") }>Summary &gt;</button>
+                <button
+                  className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700 mt-7 disabled:bg-gray-400 disabled:text-gray-200 disabled:cursor-not-allowed"
+                  onClick={() => router.push("summary")}
+                  disabled={!idea?.skepticalShark || !idea.supportiveShark || !idea.constructiveShark}
+                >
+                  {!idea?.skepticalShark || !idea.supportiveShark || !idea.constructiveShark ? "more sharks to hear from" : "Summary >"}
+                </button>
               </div>
             </div>
             {(!idleSkep || !idleSup || !idleCon) && (
@@ -368,7 +384,12 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
                 )}
               </div>
             </div>
-            <button className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700" onClick={()=>router.push("\summary") }>See and share summary</button>
+            <button
+              className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700"
+              onClick={() => router.push("summary")}
+            >
+              See and share summary
+            </button>
           </div>
         </div>
       </div>

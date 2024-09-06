@@ -15,6 +15,7 @@ const Page: React.FC = () => {
   useEffect(() => {
     const ideaid = localStorage.getItem("sp-idea-id") ?? "";
     if (!ideaid) {
+      router.refresh()
       router.push("/");
       return;
     }
@@ -26,12 +27,14 @@ const Page: React.FC = () => {
         const result = await client.models.Idea.get({ id: ideaid });
         console.log("result", result);
         if (!result || !result.data) {
+          router.refresh()
           router.push("/");
         } else {
           setIdea(result.data as Schema["Idea"]["type"]);
           setCustomersText(result.data.customers ?? "");
         }
       } catch (error) {
+        router.refresh()
         router.push("/");
       }
     };

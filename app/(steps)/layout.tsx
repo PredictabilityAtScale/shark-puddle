@@ -44,7 +44,7 @@ export default function RootLayout({
         />
       </Head>
       <body className={inter.className}>
-        <Link href="/">
+        <a href="/">
           <header className="p-4">
             <div className="flex items-center justify-center">
               <div className="mr-4">
@@ -65,7 +65,7 @@ export default function RootLayout({
               </div>
             </div>
           </header>
-        </Link>
+        </a>
 
         <div className="flex justify-center w-full">
           <div className="flex justify-center w-full ">
@@ -74,9 +74,9 @@ export default function RootLayout({
               <br />
               <ul className="list-none">
                 <li className="mb-2">
-                  <Link href="/" className="text-gray-400 hover:text-white">
+                  <a href="/" className="text-gray-400 hover:text-white">
                     Home (start new pitch)
-                  </Link>
+                  </a>
                 </li>
                 </ul>
               <h4 className="text-lg mb-4">Shark Puddle Arena Steps</h4>

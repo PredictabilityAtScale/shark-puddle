@@ -45,7 +45,8 @@ export default function RootLayout({
         />
       </Head>
       <body className="dark">
-        <Link href="/">
+
+        <a href="/">
           <header className="flex flex-col items-center p-4">
             
               <div>
@@ -62,7 +63,7 @@ export default function RootLayout({
               </div>
             
           </header>
-        </Link>
+        </a>
 
         <div className="flex justify-center w-full">{children}</div>
       </body>

@@ -7,8 +7,6 @@ const Page: React.FC = () => {
   const markdownTemplate = `# How This Site Works - behind the scenes look
   
 ## Our goal
-We are a "pre-launch" startup who when building [heyCASEy.io](https://heycasey.io) built an infrastructure product [LLMAsAService.io](https://llmasaservice.io). Generally people were cold on the CASEy idea, but loved the infrastructure product (reminiscent of Slack?).
-
 We want to test our LLMAsAService.io platform by building a demo app that uses it. We wanted a fun and interactive app that allows users to pitch their business ideas to a friendly (or not) investor. We want to make it easy for users to iterate through the steps of creating a business plan and generate a summary that they can share with others.
 Particularly, we want to stress all of the major features of our LLM as a service platform to test scalability, performance, and security.
  

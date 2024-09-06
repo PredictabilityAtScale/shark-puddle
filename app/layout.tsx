@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
 import Link from "next/link";
+import ReactGA from "react-ga4";
+
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +20,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  ReactGA.initialize("G-VR7WPMDJXQ");
+
   return (
     <html lang="en">
       <body className={inter.className}>

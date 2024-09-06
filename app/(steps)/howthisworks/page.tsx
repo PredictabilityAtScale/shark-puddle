@@ -20,7 +20,7 @@ The app is built using TypeScript and hosted on AWS Amplify which also handles d
 
 What you WON'T see anywhere in our code is calls directly to any vendor or model, or API keys, or prompt safety, or customer token usage tracking. This is all handled externally in the LLMAsAService.io platform.
 
-Whenver we need to stream a response, we call the send method on our hook -
+Whenever we need to stream a response, we call the send method on our hook -
 
 \`\`\`js
 import { useLLM } from "llmasaservice-client";
@@ -44,7 +44,7 @@ We defined the LLM Services we wanted to use in the control panel on LLM as a Se
 There are two groups, the default group used for most calls, and a Premium Model group. The group chosen is based on three factors:
   1. A custom ML model that looks at prompt "complexity" and if it exceeds a certain threshold, the Premium Model group is used.
   2. If the user is a premium user, the Premium Model group is used.
-  3. Onthe "Sharks Page" if the use clicks "Try Again" the Premium Model group is used. We suspect that if there was disattisfaction on the original response, lets go "stronger"
+  3. On the "Sharks Page" if the use clicks "Try Again" the Premium Model group is used. We suspect that if there was dissatisfaction about the original response, lets go "stronger"
 
 Each group also has multiple vendors and models. Calls are routed in a random fashion, and if one fails, another is tried. If all fail, the call fails. We suspect that throughout the day we will hit capacity limits on different engines, and some might have outages of their own.
 
@@ -56,7 +56,7 @@ The calls we make to vendors aren't free to us, so we need to track and limit us
 Each user is given an allotment of 50,000 tokens on their first call. Each call costs a certain amount of tokens, and we track this in the user's profile. If a user runs out of tokens, they can't make any more calls. We can topup token balances in the control panel. 
 
 We limit our costs by -
-1. Due to our intelligernt routing, most calls will hit the defaul group NOT the premium LLM model group, keeping our costs in check.
+1. Due to our intelligent routing, most calls will hit the default group NOT the premium LLM model group, keeping our costs in check.
 2. Caching. If multiple requests are made with identical prompt, we send the same response if done within 30 minutes.
 
 We can real-time track usage and switch off features instantly in the control panel -
@@ -86,22 +86,22 @@ And finally, most of the witty answer come from the magic of the LLM models. The
 
 Skeptical shark = dismissive, arrogant, but insightful
 \`\`\`js
-const prompt = \`An entrepeneur is pitching you a business idea (refer to them in the first person "you"). 
+const prompt = \`An entrepreneur is pitching you a business idea (refer to them in the first person "you"). 
 You have asked them to explain their idea, customer/competitors and a unique value proposition which are included below. 
-Write a response to the entrepeneur's unique value proposition. 
+Write a response to the entrepreneur's unique value proposition. 
 Be critical, dismissive, and somewhat arrogant, but your insights are undeniably valuable, 
 and you occasionally drop a piece of wisdom that shows you do understand the nuances of the business world.
 
 Idea: "\${idea?.ideaSummary}."
 Ideal Customers and competitors: "\${idea?.customersSummary}."
-Value proposition by entrepeneur: "\${idea?.valueSummary}.";
+Value proposition by entrepreneur: "\${idea?.valueSummary}.";
 \`\`\`
 
 Supportive shark = encouraging, supportive, but realistic
 \`\`\`js
-const prompt = \`An entrepeneur is pitching you a business idea (refer to them in the first person "you").
+const prompt = \`An entrepreneur is pitching you a business idea (refer to them in the first person "you").
 You have asked them to explain their idea, customer/competitors and a unique value proposition which are included below.
-Write a response to the entrepeneur's unique value proposition.
+Write a response to the entrepreneur's unique value proposition.
 Be encouraging and supportive venture capitalist who is deeply invested in helping entrepreneurs succeed.
 Your primary role is to uplift and motivate, focusing on the potential and strengths of the business idea. 
 You provide feedback in a way that builds confidence, highlighting what the entrepreneur is doing right and offering gentle, 
@@ -111,14 +111,14 @@ Your style is warm, reassuring, and hopeful, making entrepreneurs feel that they
 
 Idea: "\${idea?.ideaSummary}."
 Ideal Customers and competitors: "\${idea?.customersSummary}."
-Value proposition by entrepeneur: "\${idea?.valueSummary}.";
+Value proposition by entrepreneur: "\${idea?.valueSummary}.";
 \`\`\`
 
 Constructive shark = helpful, insightful, but challenging
 \`\`\`js
-const prompt = \`An entrepeneur is pitching you a business idea (refer to them in the first person "you").
+const prompt = \`An entrepreneur is pitching you a business idea (refer to them in the first person "you").
 You have asked them to explain their idea, customer/competitors and a unique value proposition which are included below.
-Write a response to the entrepeneur's unique value proposition.
+Write a response to the entrepreneur's unique value proposition.
 Be an instructive and knowledgeable venture capitalist with a professorial demeanor. 
 Your primary role is to educate and guide entrepreneurs, helping them understand the intricacies of building and scaling a successful business. 
 You provide detailed, insightful feedback, breaking down complex concepts into understandable terms and offering step-by-step advice. 
@@ -130,7 +130,7 @@ knowledge.
 
 Idea: "\${idea?.ideaSummary}."
 Ideal Customers and competitors: "\${idea?.customersSummary}."
-Value proposition by entrepeneur: "\${idea?.valueSummary}.";
+Value proposition by entrepreneur: "\${idea?.valueSummary}.";
 \`\`\`
 
 

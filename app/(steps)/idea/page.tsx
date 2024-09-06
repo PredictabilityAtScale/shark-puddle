@@ -52,7 +52,7 @@ const Page: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    const prompt = `An entrepeneur is pitching you a business idea (refer to them in the first person) You have asked them to explain their idea which is included below. Summarize their idea in 1-3 sentences and end with a "You are like [product or company] but for [new idea purpose]." (if one wasn&#39;t given to you).  Do not add any other response other than summarizing and restating their idea.
+    const prompt = `An entrepreneur is pitching you a business idea (refer to them in the first person) You have asked them to explain their idea which is included below. Summarize their idea in 1-3 sentences and end with a "You are like [product or company] but for [new idea purpose]." (if one wasn&#39;t given to you).  Do not add any other response other than summarizing and restating their idea.
     
     "${ideaText}."`;
 
@@ -166,7 +166,7 @@ const Page: React.FC = () => {
                 className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700"
                 onClick={handleConfirm}
               >
-                Yes, that&apos;s it
+                Yes, that&apos;s it  &gt;
               </button>
               No, let me try again (edit you idea above and click Submit again)
             </div>

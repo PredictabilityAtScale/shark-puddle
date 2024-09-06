@@ -67,7 +67,7 @@ const Page: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    const prompt = `An entrepeneur is pitching you a business idea (refer to them in the first person "you"). You have asked them to explain their idea, customer/competitors and a starting unique value proposition which are included below. 
+    const prompt = `An entrepreneur is pitching you a business idea (refer to them in the first person "you"). You have asked them to explain their idea, customer/competitors and a starting unique value proposition which are included below. 
     
     1. Summarize and augment their unique value proposition.  
     2. Create a list of assumptions that these value propositions are compelling and important to the customers.
@@ -78,7 +78,7 @@ Idea: "${idea?.ideaSummary}."
 
 Ideal Customers and competitors: "${idea?.customersSummary}."
 
-Value proposition by entrepeneur: "${valueText}."`;
+Value proposition by entrepreneur: "${valueText}."`;
 
     send(prompt);
   };
@@ -97,7 +97,7 @@ Value proposition by entrepeneur: "${valueText}."`;
     setValueText("");
 
     suggestSend(
-      `Analyze the following business idea, customers andcompetitors and create unique value propositions for the idea. Use simple text formatting, no markdown or special characters.
+      `Analyze the following business idea, customers and competitors and create unique value propositions for the idea. Use simple text formatting, no markdown or special characters.
       
 Idea: "${idea?.ideaSummary}."
 
@@ -200,7 +200,7 @@ Ideal Customers and competitors: "${idea?.customersSummary}."`
                 className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700"
                 onClick={handleConfirm}
               >
-                Yes, that&apos;s it
+                Yes, that&apos;s it  &gt;
               </button>
               No? let me try again (edit you text above and click Submit again)
             </div>

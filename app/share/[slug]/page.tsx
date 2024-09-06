@@ -46,7 +46,7 @@ const Page: React.FC<{ params: { slug: string } }> = ({ params }) => {
 
   const buildSummaryMarkdown = () => {
     if (!idea) {
-      return "Iterate through the steps to generate a summary.";
+      return "loading...";
     }
 
     return `# Shark Puddle Business Idea Summary

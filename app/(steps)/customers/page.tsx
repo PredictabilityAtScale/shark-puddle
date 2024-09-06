@@ -67,7 +67,7 @@ const Page: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    const prompt = `An entrepeneur is pitching you a business idea (refer to them in the first person "you"). You have asked them to explain their idea and ideal customer segments which are included below. 
+    const prompt = `An entrepreneur is pitching you a business idea (refer to them in the first person "you"). You have asked them to explain their idea and ideal customer segments which are included below. 
     
     1. Summarize and augment their customers.  
     2. Create a list of potential competitors.
@@ -95,7 +95,7 @@ Ideal Customers: "${customersText}."`;
     setCustomersText("");
 
     suggestSend(
-      `Analyze the following business idea and create customer segments that are ideal customers for the following prposed product or service. Use simple text formatting, no markdown or special characters.
+      `Analyze the following business idea and create customer segments that are ideal customers for the following proposed product or service. Use simple text formatting, no markdown or special characters.
       
       ${idea?.ideaSummary}`
     );
@@ -197,7 +197,7 @@ Ideal Customers: "${customersText}."`;
                 className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700"
                 onClick={handleConfirm}
               >
-                Yes, that&apos;s it
+                Yes, that&apos;s it  &gt;
               </button>
               No? let me try again (edit you text above and click Submit again)
             </div>

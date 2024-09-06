@@ -3,9 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
 import Link from "next/link";
-import ReactGA from "react-ga4";
-
-
+//import ReactGA from "react-ga4";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,8 +19,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  ReactGA.initialize("G-VR7WPMDJXQ");
+  //ReactGA.initialize("G-VR7WPMDJXQ");
 
   return (
     <html lang="en">
@@ -51,6 +49,7 @@ export default function RootLayout({
 
         <div className="flex justify-center w-full">{children}</div>
       </body>
+      <GoogleAnalytics gaId="G-VR7WPMDJXQ" />
     </html>
   );
 }

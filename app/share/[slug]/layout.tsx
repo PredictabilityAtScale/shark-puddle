@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "../../globals.css";
+import Head from "next/head";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   title: "Shark Puddle",
@@ -13,6 +15,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex justify-center w-full">{children}</div>
+    <>
+      <div className="flex justify-center w-full">{children}</div>
+      <GoogleAnalytics gaId="G-VR7WPMDJXQ" />
+    </>
   );
 }

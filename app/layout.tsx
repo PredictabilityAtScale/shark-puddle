@@ -3,8 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
 import Link from "next/link";
-//import ReactGA from "react-ga4";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,31 +19,48 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  //ReactGA.initialize("G-VR7WPMDJXQ");
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <Head>
+        <title>Shark Puddle - Construct Your Plan</title>
+        <meta
+          name="description"
+          content="Construct your own whimsical plan at Shark Puddle. Built using LLMAsAService.io."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          property="og:title"
+          content="Shark Puddle - Construct Your Plan"
+        />
+        <meta
+          property="og:description"
+          content="Construct your own whimsical plan at Shark Puddle. Built using LLMAsAService.io."
+        />
+        <meta property="og:url" content="https://shark-puddle.com" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:image"
+          content="https://shark-puddle.com/sharkpuddlescene.png"
+        />
+      </Head>
+      <body className="dark">
         <Link href="/">
-          <header className="p-4">
-            <div className="flex items-center justify-center">
-              <div className="mr-4">
+          <header className="flex flex-col items-center p-4">
+            
+              <div>
                 <Image
-                  src="/sharkpuddle.png"
+                  src="/sharkpuddlescene.png"
                   alt="Shark Puddle Logo"
-                  width={100}
-                  height={100}
+                  width={600}
+                  height={400}
                 />
               </div>
-              <div>
-                <h1 className="text-4xl font-bold">Welcome to Shark Puddle</h1>
-                <p className="text-lg text-gray-600">
-                  pitch your business plan to a friendly (or not) investor
-                  <br />
-                  Just like Shark Tank but way more fun and interactive
-                </p>
+              <div className="flex flex-col items-center p-4">
+                <h3 className="text-2xl font-bold">Welcome to Shark Puddle</h3>
+                
               </div>
-            </div>
+            
           </header>
         </Link>
 

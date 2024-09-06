@@ -6,6 +6,7 @@ import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
 import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
+import Head from "next/head";
 
 const Page: React.FC<{ params: { slug: string } }> = ({ params }) => {
   Amplify.configure(outputs);
@@ -73,10 +74,33 @@ ${idea.constructiveShark}
 
 ---
 Construct your own whimsical plan at [Shark Puddle](https://shark-puddle.com).
-Built using LLMAsAServcie.io. [Learn more](https://llmasaservice.io)`;
+Built using LLMAsAService.io. [Learn more](https://llmasaservice.io)`;
   };
 
   return (
+    <>
+    <Head>
+        <title>Shark Puddle - Construct Your Plan</title>
+        <meta
+          name="description"
+          content="Construct your own whimsical plan at Shark Puddle. Built using LLMAsAService.io."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          property="og:title"
+          content="Shark Puddle - Construct Your Plan"
+        />
+        <meta
+          property="og:description"
+          content="Construct your own whimsical plan at Shark Puddle. Built using LLMAsAService.io."
+        />
+        <meta property="og:url" content={"https://shark-puddle.com/share/" + idea?.id} />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:image"
+          content="https://shark-puddle.com/sharkpuddlescene.png"
+        />
+      </Head>
     <div className="p-1 bg-black min-h-screen w-full">
       <div className="flex flex-col items-center mt-8">
         <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl">
@@ -88,6 +112,7 @@ Built using LLMAsAServcie.io. [Learn more](https://llmasaservice.io)`;
         </div>
       </div>
     </div>
+  </>
   );
 };
 

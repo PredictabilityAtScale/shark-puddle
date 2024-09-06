@@ -63,7 +63,7 @@ ${idea.constructiveShark}
 
 ---
 Construct your own whimsical plan at [Shark Puddle](https://shark-puddle.com).
-Built using LLMAsAServcie.io. [Learn more](https://llmasaservice.io)`;
+Built using LLMAsAService.io. [Learn more](https://llmasaservice.io)`;
   };
 
   const handleShareLink = () => {

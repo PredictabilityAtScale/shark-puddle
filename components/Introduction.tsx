@@ -80,8 +80,8 @@ const Introduction: React.FC = () => {
   return (
     <div className="text-center">
       <p>
-        Welcome. We will pregressively help you defined your business plan and
-        practice your investor pitch...all in a fun and interactive way.
+        Progressively define your business idea and
+        practice your investor pitch, before swimming with the sharks
       </p>
       <p>
         Our intention is to add value (for you) and test our LLM as a Service

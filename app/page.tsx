@@ -11,7 +11,7 @@ Amplify.configure(outputs);
 
 export default function App() {
   return (
-    <main className="flex min-h-screen flex-col items-center p-10">
+    <main className="flex min-h-screen flex-col items-center">
       <div>
         <Introduction />
       </div>

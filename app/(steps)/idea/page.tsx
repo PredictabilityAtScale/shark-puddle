@@ -72,7 +72,7 @@ const Page: React.FC = () => {
 
   const handleSillyIdea = async () => {
     const idea = await send(
-      "Create a one or two sentence comical business idea",
+      "Create a one or two sentence whimsical business idea that is fun and silly. Don't worry about it being serious, just have fun with it.",
       [],
       false
     );

@@ -24,9 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <header className="p-4">
-          <div className="flex items-center justify-center">
-            <Link href="/">
+        <Link href="/">
+          <header className="p-4">
+            <div className="flex items-center justify-center">
               <div className="mr-4">
                 <Image
                   src="/sharkpuddle.png"
@@ -43,9 +43,9 @@ export default function RootLayout({
                   Just like Shark Tank but way more fun and interactive
                 </p>
               </div>
-            </Link>
-          </div>
-        </header>
+            </div>
+          </header>
+        </Link>
 
         <div className="flex justify-center w-full">{children}</div>
       </body>

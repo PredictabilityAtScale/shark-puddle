@@ -46,7 +46,7 @@ export default function RootLayout({
 
         <div className="flex justify-center w-full">
           <div className="flex justify-center w-full ">
-            <nav className="w-1/4 p-4 bg-black text-white">
+            <nav className="hidden md:block w-1/4 p-4 bg-black text-white">
               <br />
               <br />
               <h4 className="text-lg mb-4">Shark Puddle Arena Steps</h4>

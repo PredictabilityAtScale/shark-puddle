@@ -184,7 +184,7 @@ Ideal Customers and competitors: "${idea?.customersSummary}."`
                 also listing some assumption you should consider.<br />
               </p>
               <p className="text-white">
-                <Markdown className="prose prose-sm !max-w-none dark:prose-invert">
+                <Markdown className="prose prose-sm !max-w-none ">
                   {response.length > 0
                     ? response
                     : idea?.valueSummary &&

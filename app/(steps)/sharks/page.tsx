@@ -321,11 +321,11 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
                   <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl mt-2">
                     <div className="mb-4">
                       {responseSkep.length > 0 ? (
-                        <Markdown className="prose prose-sm !max-w-none dark:prose-invert">
+                        <Markdown className="prose prose-sm !max-w-none ">
                           {responseSkep}
                         </Markdown>
                       ) : (
-                        <Markdown className="prose prose-sm !max-w-none dark:prose-invert">
+                        <Markdown className="prose prose-sm !max-w-none ">
                           {idea?.skepticalShark}
                         </Markdown>
                       )}
@@ -336,11 +336,11 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
                   <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl mt-2">
                     <div className="mb-4">
                       {responseSup.length > 0 ? (
-                        <Markdown className="prose prose-sm !max-w-none dark:prose-invert">
+                        <Markdown className="prose prose-sm !max-w-none ">
                           {responseSup}
                         </Markdown>
                       ) : (
-                        <Markdown className="prose prose-sm !max-w-none dark:prose-invert">
+                        <Markdown className="prose prose-sm !max-w-none ">
                           {idea?.supportiveShark}
                         </Markdown>
                       )}
@@ -351,11 +351,11 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
                   <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl mt-2">
                     <div className="mb-4">
                       {responseCon.length > 0 ? (
-                        <Markdown className="prose prose-sm !max-w-none dark:prose-invert">
+                        <Markdown className="prose prose-sm !max-w-none ">
                           {responseCon}
                         </Markdown>
                       ) : (
-                        <Markdown className="prose prose-sm !max-w-none dark:prose-invert">
+                        <Markdown className="prose prose-sm !max-w-none ">
                           {idea?.constructiveShark}
                         </Markdown>
                       )}

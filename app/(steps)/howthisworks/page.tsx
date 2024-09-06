@@ -156,7 +156,7 @@ We hope you enjoy the app and have fun pitching your business ideas!`;
       <div className="p-1 bg-black min-h-screen w-full">
         <div className="flex flex-col items-center mt-8">
           <p className="text-white ">
-            <Markdown  className="prose prose-sm !max-w-none dark:prose-invert ">
+            <Markdown  className="prose prose-sm !max-w-none ">
               {markdownTemplate}
             </Markdown>
           </p>

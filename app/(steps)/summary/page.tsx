@@ -115,7 +115,7 @@ Built using LLMAsAService.io. [Learn more](https://llmasaservice.io)`;
 
           <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl">
             <p className="text-white">
-              <Markdown className="prose prose-sm !max-w-none dark:prose-invert">
+              <Markdown className="prose prose-sm !max-w-none ">
                 {buildSummaryMarkdown()}
               </Markdown>
             </p>

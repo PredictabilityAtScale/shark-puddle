@@ -12,7 +12,7 @@
     "@aws-amplify/ui-react": "^6.1.13",
     "@next/third-parties": "^14.2.8",
     "aws-amplify": "^6.5.4",
-    "llmasaservice-client": "^0.3.0",
+    "llmasaservice-client": "^0.4.0",
     "next": "14.1.1",
     "react": "^18",
     "react-dom": "^18",

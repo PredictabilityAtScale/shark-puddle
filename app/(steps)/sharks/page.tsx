@@ -118,8 +118,9 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
         prompt,
         [],
         true,
-        new AbortController(),
+        !tryAgain,
         tryAgain ? "d4815650-f41c-421a-ab9c-2201675de892" : null,
+        new AbortController(),
         skepCallback
       );
     }
@@ -163,8 +164,9 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
         prompt,
         [],
         true,
-        new AbortController(),
+        !tryAgain,
         tryAgain ? "d4815650-f41c-421a-ab9c-2201675de892" : null,
+        new AbortController(),
         suppCallback
       );
     }
@@ -207,8 +209,9 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
         prompt,
         [],
         true,
-        new AbortController(),
+        !tryAgain,
         tryAgain ? "d4815650-f41c-421a-ab9c-2201675de892" : null,
+        new AbortController(),
         conCallback
       );
     }

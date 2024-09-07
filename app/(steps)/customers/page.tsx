@@ -105,8 +105,9 @@ Ideal Customers: "${customersText}."`;
       ${idea?.ideaSummary}`,
       [],
       true,
-      new AbortController(),
+      true,
       null,
+      new AbortController(),
       (response: string) => {
         setCustomersText(response);
       }

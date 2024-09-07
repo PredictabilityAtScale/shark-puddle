@@ -37,11 +37,11 @@ export default function RootLayout({
           property="og:description"
           content="Construct your own whimsical plan at Shark Puddle. Built using LLMAsAService.io."
         />
-        <meta property="og:url" content="https://shark-puddle.com" />
+        <meta property="og:url" content="//shark-puddle.com" />
         <meta property="og:type" content="website" />
         <meta
           property="og:image"
-          content="https://shark-puddle.com/sharkpuddlescene.png"
+          content="//shark-puddle.com/sharkpuddlescene.png"
         />
       </Head>
       <body className="dark">

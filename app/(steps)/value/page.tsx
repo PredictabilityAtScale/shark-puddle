@@ -104,8 +104,9 @@ Idea: "${idea?.ideaSummary}."
 Ideal Customers and competitors: "${idea?.customersSummary}."`,
       [],
       true,
-      new AbortController(),
+      true,
       null,
+      new AbortController(),
       (response: string) => {
         setValueText(response);
       }

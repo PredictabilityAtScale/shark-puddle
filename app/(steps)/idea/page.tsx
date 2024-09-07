@@ -74,6 +74,7 @@ const Page: React.FC = () => {
     const idea = await send(
       "Create a one or two sentence whimsical business idea that is fun and silly. Don't worry about it being serious, just have fun with it.",
       [],
+      false,
       false
     );
     setIdeaText(idea);

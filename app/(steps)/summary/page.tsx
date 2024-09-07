@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import Markdown from "react-markdown";
 import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
+import remarkGfm from 'remark-gfm'
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -36,7 +37,7 @@ const Page: React.FC = () => {
 
   const buildSummaryMarkdown = () => {
     if (!idea) {
-      return "Iterate through the steps to generate a summary.";
+      return "loading...";
     }
 
     return `# Shark Puddle Business Idea Summary
@@ -66,6 +67,7 @@ Construct your own whimsical plan at [Shark Puddle](https://shark-puddle.com).
 Built using LLMAsAService.io. [Learn more](https://llmasaservice.io)`;
   };
 
+
   const handleShareLink = () => {
     const shareUrl =
       window.location.href.replace("summary", "share") + "/" + idea?.id;
@@ -92,21 +94,21 @@ Built using LLMAsAService.io. [Learn more](https://llmasaservice.io)`;
         <div className="flex flex-col items-center mt-8">
           <div className="mt-4 flex space-x-4 p-4">
             <button
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
               onClick={handleShareLink}
             >
               Share via Link
             </button>
 
             <button
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
               onClick={handleShareLinkedIn}
             >
               Share via LinkedIN
             </button>
 
             <button
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
               onClick={handleShareEmail}
             >
               Share via Email
@@ -115,7 +117,7 @@ Built using LLMAsAService.io. [Learn more](https://llmasaservice.io)`;
 
           <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl">
             <p className="text-white">
-              <Markdown className="prose prose-sm !max-w-none ">
+              <Markdown className="prose prose-sm !max-w-none" remarkPlugins={[remarkGfm]}>
                 {buildSummaryMarkdown()}
               </Markdown>
             </p>

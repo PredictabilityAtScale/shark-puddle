@@ -101,15 +101,15 @@ Value proposition by entrepreneur: "${valueText}."`;
       
 Idea: "${idea?.ideaSummary}."
 
-Ideal Customers and competitors: "${idea?.customersSummary}."`
+Ideal Customers and competitors: "${idea?.customersSummary}."`,
+      [],
+      true,
+      new AbortController(),
+      null,
+      (response: string) => {
+        setValueText(response);
+      }
     );
-
-    while (!suggestIdle) {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setValueText(suggestResponse);
-    }
-
-    setValueText(suggestResponse);
   };
 
   return (
@@ -136,7 +136,16 @@ Ideal Customers and competitors: "${idea?.customersSummary}."`
             </div>
           </div>
           <div className="mb-4">
-            <h1 className="text-l font-bold text-white">Small Fish (you)</h1>
+          <div className="flex items-center mb-4">
+              <img
+                src="goldfish.png"
+                alt="Goldfish Icon"
+                className="w-11 h-11 mr-2"
+              />{" "}
+              <p className="text-gray-300">
+                <strong>You: </strong> Enter your ideas unique value proposition here...Why will your customers choose you over your competitors?
+              </p>
+            </div>
             <textarea
               className="w-full p-4 border border-gray-600 rounded bg-gray-700 text-white"
               rows={5}
@@ -147,18 +156,18 @@ Ideal Customers and competitors: "${idea?.customersSummary}."`
           </div>
           <div className="flex justify-between">
             <button
-              className={`px-6 py-3 mr-2 rounded hover:bg-blue-700 ${
-                !idle || !suggestIdle
+              className={`px-3 py-1 mr-2 rounded hover:bg-blue-700 ${
+                !idle || !suggestIdle || valueText.length === 0
                   ? "bg-gray-400 text-gray-700 cursor-not-allowed"
                   : "bg-blue-600 text-white hover:bg-yellow-700"
               }`}
               onClick={handleSubmit}
-              disabled={!idle || !suggestIdle}
+              disabled={!idle || !suggestIdle || valueText.length === 0}
             >
               Submit
             </button>
             <button
-              className={`px-6 py-3 rounded ml-auto ${
+              className={`px-3 py-1 rounded ml-auto ${
                 !idle || !suggestIdle
                   ? "bg-gray-400 text-gray-700 cursor-not-allowed"
                   : "bg-yellow-600 text-white hover:bg-yellow-700"
@@ -202,7 +211,7 @@ Ideal Customers and competitors: "${idea?.customersSummary}."`
 
             <div className="flex justify-between">
               <button
-                className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 mr-2"
+                className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 mr-2"
                 onClick={handleConfirm}
               >
                 Yes, that&apos;s it &gt;

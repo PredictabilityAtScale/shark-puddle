@@ -87,7 +87,7 @@ const Page: React.FC = () => {
         </h2>
         <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl">
           <div className="mb-4">
-            <div className="flex items-center">
+            <div className="flex items-center mb-4">
               <img
                 src="sharkpuddle.png"
                 alt="Shark Puddle Icon"
@@ -101,7 +101,16 @@ const Page: React.FC = () => {
             </div>
           </div>
           <div className="mb-4">
-            <h1 className="text-l font-bold text-white">Small Fish (you)</h1>
+            <div className="flex items-center mb-4">
+              <img
+                src="goldfish.png"
+                alt="Goldfish Icon"
+                className="w-11 h-11 mr-2"
+              />{" "}
+              <p className="text-gray-300">
+                <strong>You: </strong> Enter your idea here...
+              </p>
+            </div>
             <textarea
               className="w-full p-4 border border-gray-600 rounded bg-gray-700 text-white"
               rows={3}
@@ -112,18 +121,18 @@ const Page: React.FC = () => {
           </div>
           <div className="flex justify-between">
             <button
-              className={`px-6 py-3 mr-2 rounded hover:bg-blue-700 ${
-                !idle
+              className={`px-3 py-1 mr-2 rounded hover:bg-blue-700 ${
+                !idle || ideaText.length === 0
                   ? "bg-gray-400 text-gray-700 cursor-not-allowed"
                   : "bg-blue-600 text-white hover:bg-yellow-700"
               }`}
               onClick={handleSubmit}
-              disabled={!idle}
+              disabled={!idle || ideaText.length === 0}
             >
               Submit
             </button>
             <button
-              className={`px-6 py-3 rounded ml-auto ${
+              className={`px-3 py-1 rounded ml-auto ${
                 !idle
                   ? "bg-gray-400 text-gray-700 cursor-not-allowed"
                   : "bg-yellow-600 text-white hover:bg-yellow-700"
@@ -165,7 +174,7 @@ const Page: React.FC = () => {
 
             <div className="flex justify-between">
               <button
-                className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 mr-2"
+                className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 mr-2"
                 onClick={handleConfirm}
               >
                 Yes, that&apos;s it &gt;

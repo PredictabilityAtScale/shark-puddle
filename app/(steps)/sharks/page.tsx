@@ -33,15 +33,11 @@ const Page: React.FC = () => {
     };
 
     fetchIdea();
-
-
-
   }, []);
 
   useEffect(() => {
-    
     if (!idea) return;
-    if  (localStorage.getItem("sp-idea-id") ?? "" === idea.id) return;
+    //if (localStorage.getItem("sp-idea-id") ?? "" === idea.id) return;
 
     if (!idea?.skepticalShark || idea?.skepticalShark?.length > 0) {
       handleSkepticalSubmit(false);
@@ -98,6 +94,11 @@ const Page: React.FC = () => {
 
     setCurrentShark("skeptical");
 
+    if (!tryAgain && responseSkep.length > 0) {
+      return;
+    }
+
+
     if (
       tryAgain ||
       !idea?.skepticalShark ||
@@ -137,6 +138,10 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
     };
 
     setCurrentShark("supportive");
+
+    if (!tryAgain && responseSup.length > 0) {
+      return;
+    }
 
     if (
       tryAgain ||
@@ -178,6 +183,10 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
     };
 
     setCurrentShark("constructive");
+
+    if (!tryAgain && responseCon.length > 0) {
+      return;
+    }
 
     if (
       tryAgain ||
@@ -222,7 +231,7 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
                   className="w-12 h-12 mb-2"
                 />
                 <button
-                  className={`px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 ${
+                  className={`px-2 py-1 rounded bg-blue-600 text-white hover:bg-blue-700 ${
                     !idleSkep ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                   onClick={() => handleSkepticalSubmit(false)}
@@ -249,7 +258,7 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
                   className="w-12 h-12 mb-2"
                 />
                 <button
-                  className={`px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700 ${
+                  className={`px-2 py-1 rounded bg-green-600 text-white hover:bg-green-700 ${
                     !idleSup ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                   onClick={() => handleSupportiveSubmit(false)}
@@ -276,7 +285,7 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
                   className="w-12 h-12 mb-2"
                 />
                 <button
-                  className={`px-4 py-2 rounded bg-yellow-600 text-white hover:bg-yellow-700 ${
+                  className={`px-2 py-1 rounded bg-yellow-600 text-white hover:bg-yellow-700 ${
                     !idleCon ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                   onClick={() => handleConstructiveSubmit(false)}
@@ -298,11 +307,19 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
               </div>
               <div>
                 <button
-                  className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700 mt-7 disabled:bg-gray-400 disabled:text-gray-200 disabled:cursor-not-allowed"
+                  className="px-2 py-1 rounded bg-green-600 text-white hover:bg-green-700 mt-7 disabled:bg-gray-400 disabled:text-gray-200 disabled:cursor-not-allowed"
                   onClick={() => router.push("summary")}
-                  disabled={!idea?.skepticalShark || !idea.supportiveShark || !idea.constructiveShark}
+                  disabled={
+                    (!idea?.skepticalShark && responseSkep.length <= 0) ||
+                    (!idea?.supportiveShark && responseSup.length <= 0) ||
+                    (!idea?.constructiveShark && responseCon.length <= 0)
+                  }
                 >
-                  {!idea?.skepticalShark || !idea.supportiveShark || !idea.constructiveShark ? "more sharks to hear from" : "Summary >"}
+                  {(!idea?.skepticalShark && responseSkep.length <= 0) ||
+                  (!idea?.supportiveShark && responseSup.length <= 0) ||
+                  (!idea?.constructiveShark && responseCon.length <= 0)
+                    ? "more sharks to hear from"
+                    : "Summary >"}
                 </button>
               </div>
             </div>
@@ -339,7 +356,9 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
 
                 {currentShark === "skeptical" && (
                   <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl mt-2">
-                    <div className="mb-4">
+                    
+                    <div className="mb-4"><>
+                    {console.log("Rendering skeptical response:", responseSkep.length)}
                       {responseSkep.length > 0 ? (
                         <Markdown className="prose prose-sm !max-w-none ">
                           {responseSkep}
@@ -349,6 +368,7 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
                           {idea?.skepticalShark}
                         </Markdown>
                       )}
+                      </>
                     </div>
                   </div>
                 )}
@@ -384,12 +404,112 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
                 )}
               </div>
             </div>
-            <button
-              className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700"
-              onClick={() => router.push("summary")}
-            >
-              See and share summary
-            </button>
+
+<p className="m-4">
+                Tip: Try all three sharks to get a better understanding of your idea....
+</p>
+            <div className="flex items-center justify-between">
+              <div className="flex flex-col items-center">
+                <img
+                  src="skepshark1.png"
+                  alt="Skeptical Shark"
+                  className="w-12 h-12 mb-2"
+                />
+                <button
+                  className={`px-2 py-1 rounded bg-blue-600 text-white hover:bg-blue-700 ${
+                    !idleSkep ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                  onClick={() => handleSkepticalSubmit(false)}
+                  disabled={!idleSkep}
+                >
+                  Skeptical Shark
+                </button>
+                <button
+                  className={`text-sm text-blue-600 hover:text-blue-700 px-2 py-1 rounded ${
+                    !idleSkep ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                  onClick={() => {
+                    handleSkepticalSubmit(true);
+                  }}
+                  disabled={!idleSkep}
+                >
+                  try again
+                </button>
+              </div>
+              <div className="flex flex-col items-center">
+                <img
+                  src="supportiveshark1.png"
+                  alt="Supportive Shark"
+                  className="w-12 h-12 mb-2"
+                />
+                <button
+                  className={`px-2 py-1 rounded bg-green-600 text-white hover:bg-green-700 ${
+                    !idleSup ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                  onClick={() => handleSupportiveSubmit(false)}
+                  disabled={!idleSup}
+                >
+                  Supportive Shark
+                </button>
+                <button
+                  className={`text-sm text-blue-600 hover:text-blue-700 px-2 py-1 rounded ${
+                    !idleSup ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                  onClick={() => {
+                    handleSupportiveSubmit(true);
+                  }}
+                  disabled={!idleSup}
+                >
+                  try again
+                </button>
+              </div>
+              <div className="flex flex-col items-center">
+                <img
+                  src="constructiveshark1.png"
+                  alt="Constructive Shark"
+                  className="w-12 h-12 mb-2"
+                />
+                <button
+                  className={`px-2 py-1 rounded bg-yellow-600 text-white hover:bg-yellow-700 ${
+                    !idleCon ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                  onClick={() => handleConstructiveSubmit(false)}
+                  disabled={!idleCon}
+                >
+                  Constructive Shark
+                </button>
+                <button
+                  className={`text-sm text-blue-600 hover:text-blue-700 px-2 py-1 rounded ${
+                    !idleCon ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                  onClick={() => {
+                    handleConstructiveSubmit(true);
+                  }}
+                  disabled={!idleCon}
+                >
+                  try again
+                </button>
+              </div>
+              
+              <div>
+                <button
+                  className="px-2 py-1 rounded bg-green-600 text-white hover:bg-green-700 mt-7 disabled:bg-gray-400 disabled:text-gray-200 disabled:cursor-not-allowed"
+                  onClick={() => router.push("summary")}
+                  disabled={
+                    (!idea?.skepticalShark && responseSkep.length <= 0) ||
+                    (!idea?.supportiveShark && responseSup.length <= 0) ||
+                    (!idea?.constructiveShark && responseCon.length <= 0)
+                  }
+                >
+                  {(!idea?.skepticalShark && responseSkep.length <= 0) ||
+                  (!idea?.supportiveShark && responseSup.length <= 0) ||
+                  (!idea?.constructiveShark && responseCon.length <= 0)
+                    ? "more sharks to hear from"
+                    : "Summary >"}
+                </button>
+              </div>
+            </div>
+            
           </div>
         </div>
       </div>

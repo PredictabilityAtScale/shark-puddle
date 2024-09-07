@@ -69,9 +69,7 @@ const Page: React.FC = () => {
   };
 
   const handleSubmit = () => {
-
     console.log("idea", idea);
-
 
     const prompt = `An entrepreneur is pitching you a business idea (refer to them in the first person "you"). You have asked them to explain their idea and ideal customer segments which are included below. 
     
@@ -104,15 +102,15 @@ Ideal Customers: "${customersText}."`;
     suggestSend(
       `Analyze the following business idea and create customer segments that are ideal customers for the following proposed product or service. Use simple text formatting, no markdown or special characters.
       
-      ${idea?.ideaSummary}`
+      ${idea?.ideaSummary}`,
+      [],
+      true,
+      new AbortController(),
+      null,
+      (response: string) => {
+        setCustomersText(response);
+      }
     );
-
-    while (!suggestIdle) {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setCustomersText(suggestResponse);
-    }
-
-    setCustomersText(suggestResponse);
   };
 
   return (
@@ -138,7 +136,17 @@ Ideal Customers: "${customersText}."`;
             </div>
           </div>
           <div className="mb-4">
-            <h1 className="text-l font-bold text-white">Small Fish (you)</h1>
+            <div className="flex items-center mb-4">
+              <img
+                src="goldfish.png"
+                alt="Goldfish Icon"
+                className="w-11 h-11 mr-2"
+              />{" "}
+              <p className="text-gray-300">
+                <strong>You: </strong> Enter details about your ideal customer
+                (segments) here...
+              </p>
+            </div>
             <textarea
               className="w-full p-4 border border-gray-600 rounded bg-gray-700 text-white"
               rows={5}
@@ -149,18 +157,18 @@ Ideal Customers: "${customersText}."`;
           </div>
           <div className="flex justify-between">
             <button
-              className={`px-6 py-3 mr-2 rounded hover:bg-blue-700 ${
-                !idle || !suggestIdle
+              className={`px-3 py-1 mr-2 rounded hover:bg-blue-700 ${
+                !idle || !suggestIdle || customersText.length === 0
                   ? "bg-gray-400 text-gray-700 cursor-not-allowed"
                   : "bg-blue-600 text-white hover:bg-yellow-700"
               }`}
               onClick={handleSubmit}
-              disabled={!idle || !suggestIdle}
+              disabled={!idle || !suggestIdle || customersText.length === 0}
             >
               Submit
             </button>
             <button
-              className={`px-6 py-3 rounded ml-auto ${
+              className={`px-3 py-1 rounded ml-auto ${
                 !idle || !suggestIdle
                   ? "bg-gray-400 text-gray-700 cursor-not-allowed"
                   : "bg-yellow-600 text-white hover:bg-yellow-700"
@@ -184,13 +192,13 @@ Ideal Customers: "${customersText}."`;
                   alt="Shark Puddle Icon"
                   className="w-11 h-11 mr-2"
                 />
-               
-             
-              <p className="text-gray-300">
-              <strong>Puddle Shark: </strong> OK, let me summarize what you said. Did I understand you? I am
-                also listing some competitors you should consider.
-                <br />
-              </p>
+
+                <p className="text-gray-300">
+                  <strong>Puddle Shark: </strong> OK, let me summarize what you
+                  said. Did I understand you? I am also listing some competitors
+                  you should consider.
+                  <br />
+                </p>
               </div>
               <p className="text-white">
                 <Markdown className="prose prose-sm !max-w-none ">
@@ -206,7 +214,7 @@ Ideal Customers: "${customersText}."`;
 
             <div className="flex justify-between">
               <button
-                className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 mr-2"
+                className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 mr-2"
                 onClick={handleConfirm}
               >
                 Yes, that&apos;s it &gt;

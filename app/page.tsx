@@ -16,7 +16,7 @@ export default function App() {
         <Introduction />
       </div>
 
-      <div className="text-white" >Disclaimer: This is for fun. Don't make serious decisions on the feedback on your ideas.</div>
+      <div className="text-white" >Disclaimer: This is intended for entertainment purposes only.</div>
     </main>
   );
 }

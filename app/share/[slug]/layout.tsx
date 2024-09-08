@@ -3,23 +3,16 @@ import { Metadata, ResolvingMetadata } from "next";
 import "../../globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
-
 type Props = {
   params: { id: string }
-  searchParams: { [key: string]: string | string[] | undefined }
 }
  
-export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-
+export const generateMetadata = async (
+  { params }: Props
+): Promise<Metadata> => {
   const id = params.id
+  console.log('id', id)
 
- 
-  // optionally access and extend (rather than replace) parent metadata
-  //const previousImages = (await parent).openGraph?.images || []
- 
   return {
     metadataBase: new URL('https://shark-puddle.com'),
     title: "Shark Puddle",
@@ -36,6 +29,7 @@ export async function generateMetadata(
       },
   }
 }
+
 
 export default function Layout({
   children,

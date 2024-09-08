@@ -8,6 +8,8 @@ import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
 import Head from "next/head";
 
+
+
 const Page: React.FC<{ params: { slug: string } }> = ({ params }) => {
   Amplify.configure(outputs);
 

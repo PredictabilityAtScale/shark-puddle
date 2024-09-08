@@ -9,9 +9,19 @@ import Head from "next/head";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://shark-puddle.com'),
   title: "Shark Puddle",
   description:
     "Shark Puddle business idea pitch platform (demo app for LLMAsAService.io)",
+    openGraph: {
+      title: "Shark Puddle",
+      description:
+        "Shark Puddle business idea pitch platform (demo app for LLMAsAService.io)",
+      type: "website",
+      url: "https://shark-puddle.com",
+      images: 
+        "/sharkpuddlescene.png"
+    },
 };
 
 export default function RootLayout({
@@ -22,28 +32,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <Head>
-        <title>Shark Puddle - Construct Your Plan</title>
-        <meta
-          name="description"
-          content="Construct your own whimsical plan at Shark Puddle. Built using LLMAsAService.io."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-          property="og:title"
-          content="Shark Puddle - Construct Your Plan"
-        />
-        <meta
-          property="og:description"
-          content="Construct your own whimsical plan at Shark Puddle. Built using LLMAsAService.io."
-        />
-        <meta property="og:url" content="//shark-puddle.com" />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:image"
-          content="//shark-puddle.com/sharkpuddlescene.png"
-        />
-      </Head>
+     
       <body className="dark">
 
         <a href="/">

@@ -3,15 +3,12 @@ import { Metadata, ResolvingMetadata } from "next";
 import "../../globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
-type Props = {
-  params: { id: string }
-}
+
  
 export const generateMetadata = async (
-  { params }: Props
+  { params }: { params: { slug: string } },
 ): Promise<Metadata> => {
-  const id = params.id
-  console.log('id', id)
+  const id = params.slug;
 
   return {
     metadataBase: new URL('https://shark-puddle.com'),

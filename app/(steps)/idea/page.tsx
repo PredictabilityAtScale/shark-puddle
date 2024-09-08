@@ -10,7 +10,7 @@ const Page: React.FC = () => {
   const router = useRouter();
   const client = generateClient<Schema>();
 
-  console.log("NEXT_PUBLIC_SOMETHING", process.env.NEXT_PUBLIC_SOMETHING);
+  console.log("NEXT_PUBLIC_PROJECT_ID", process.env.NEXT_PUBLIC_PROJECT_ID);
 
 
   const [ideaText, setIdeaText] = useState("");

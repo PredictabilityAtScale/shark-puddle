@@ -49,7 +49,7 @@ const Page: React.FC = () => {
     idle: idleSkep,
     send: sendSkep,
   } = useLLM({
-    project_id: "379aeb32-8de9-4854-af83-1a0796d1fcd0",
+    project_id: process.env.NEXT_PUBLIC_PROJECT_ID,
     customer: {
       customer_id: idea?.email ?? "",
       customer_name: idea?.email ?? "",
@@ -61,7 +61,7 @@ const Page: React.FC = () => {
     idle: idleSup,
     send: sendSup,
   } = useLLM({
-    project_id: "379aeb32-8de9-4854-af83-1a0796d1fcd0",
+    project_id: process.env.NEXT_PUBLIC_PROJECT_ID,
     customer: {
       customer_id: idea?.email ?? "",
       customer_name: idea?.email ?? "",
@@ -73,7 +73,7 @@ const Page: React.FC = () => {
     idle: idleCon,
     send: sendCon,
   } = useLLM({
-    project_id: "379aeb32-8de9-4854-af83-1a0796d1fcd0",
+    project_id: process.env.NEXT_PUBLIC_PROJECT_ID,
     customer: {
       customer_id: idea?.email ?? "",
       customer_name: idea?.email ?? "",

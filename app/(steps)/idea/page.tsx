@@ -10,9 +10,6 @@ const Page: React.FC = () => {
   const router = useRouter();
   const client = generateClient<Schema>();
 
-  console.log("NEXT_PUBLIC_PROJECT_ID", process.env.NEXT_PUBLIC_PROJECT_ID);
-
-
   const [ideaText, setIdeaText] = useState("");
   const [idea, setIdea] = useState<Schema["Idea"]["type"] | null>(null);
 
@@ -43,7 +40,7 @@ const Page: React.FC = () => {
   }, []);
 
   const { response, idle, send } = useLLM({
-    project_id: "379aeb32-8de9-4854-af83-1a0796d1fcd0",
+    project_id: process.env.NEXT_PUBLIC_PROJECT_ID,
     customer: {
       customer_id: idea?.email ?? "",
       customer_name: idea?.email ?? "",

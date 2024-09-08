@@ -56,7 +56,6 @@ We limit our costs by -
 We can real-time track usage and switch off features instantly in the control panel -
 ![LLMAsAService.io](./public/llmasaservicecontrol.png)
 
-
 #### Prompt Safety
 There are multiple levels of prompt safety employed.
 

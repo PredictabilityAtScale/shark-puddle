@@ -8,19 +8,18 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://shark-puddle.com'),
+  metadataBase: new URL("https://shark-puddle.com"),
   title: "Shark Puddle",
   description:
     "Shark Puddle business idea pitch platform (demo app for LLMAsAService.io)",
-    openGraph: {
-      title: "Shark Puddle",
-      description:
-        "Shark Puddle business idea pitch platform (demo app for LLMAsAService.io)",
-      type: "website",
-      url: "https://shark-puddle.com",
-      images: 
-        "/sharkpuddlescene.png"
-    },
+  openGraph: {
+    title: "Shark Puddle",
+    description:
+      "Shark Puddle business idea pitch platform (demo app for LLMAsAService.io)",
+    type: "website",
+    url: "https://shark-puddle.com",
+    images: "/sharkpuddlescene.png",
+  },
 };
 
 export default function RootLayout({
@@ -29,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-   <>
+    <>
       <body className={inter.className}>
         <a href="/">
           <header className="p-4">
@@ -65,7 +64,7 @@ export default function RootLayout({
                     Home (start new pitch)
                   </a>
                 </li>
-                </ul>
+              </ul>
               <h4 className="text-lg mb-4">Shark Puddle Arena Steps</h4>
               <ul className="list-none">
                 <li className="mb-2">
@@ -131,15 +130,25 @@ export default function RootLayout({
                 </li>
                 <li className="mb-2">
                   <Link
-                href="mailto:help@heycasey.io"
-                className="text-gray-400 hover:text-white"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Contact us
-              </Link>
-            </li>
-          </ul>
+                    href="mailto:help@heycasey.io"
+                    className="text-gray-400 hover:text-white"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Contact us
+                  </Link>
+                </li>
+                <li className="mb-2">
+                  <Link
+                    href="https://github.com/PredictabilityAtScale/shark-puddle"
+                    className="text-gray-400 hover:text-white"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Source code (Github repo)
+                  </Link>
+                </li>
+              </ul>
             </nav>
             <div className="w-full md:w-2/3 p-4">{children}</div>
           </div>

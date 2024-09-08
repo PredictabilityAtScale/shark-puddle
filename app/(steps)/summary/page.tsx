@@ -116,11 +116,11 @@ Built using LLMAsAService.io. [Learn more](https://llmasaservice.io)`;
           </div>
 
           <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl">
-            <p className="text-white">
+            <div className="text-white">
               <Markdown className="prose prose-sm !max-w-none" remarkPlugins={[remarkGfm]}>
                 {buildSummaryMarkdown()}
               </Markdown>
-            </p>
+            </div>
           </div>
         </div>
       </div>

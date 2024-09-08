@@ -10,6 +10,9 @@ const Page: React.FC = () => {
   const router = useRouter();
   const client = generateClient<Schema>();
 
+  console.log("NEXT_PUBLIC_SOMETHING", process.env.NEXT_PUBLIC_SOMETHING);
+
+
   const [ideaText, setIdeaText] = useState("");
   const [idea, setIdea] = useState<Schema["Idea"]["type"] | null>(null);
 
@@ -35,6 +38,8 @@ const Page: React.FC = () => {
     };
 
     fetchIdea();
+
+
   }, []);
 
   const { response, idle, send } = useLLM({
@@ -72,7 +77,7 @@ const Page: React.FC = () => {
 
   const handleSillyIdea = async () => {
     const idea = await send(
-      "Create a one or two sentence whimsical business idea that is fun and silly. Don't worry about it being serious, just have fun with it.",
+      "Create me a silly random idea for a business. I want it to be sort of viable, but ultimately foolish.",
       [],
       false,
       false
@@ -162,7 +167,7 @@ const Page: React.FC = () => {
                   <br />
                 </p>
               </div>
-              <p className="text-white">
+              <div className="text-white">
                 <Markdown className="prose prose-sm !max-w-none">
                   {response.length > 0
                     ? response
@@ -170,7 +175,7 @@ const Page: React.FC = () => {
                     ? idea?.ideaSummary
                     : ""}
                 </Markdown>
-              </p>
+              </div>
             </div>
 
             <div className="flex justify-between">

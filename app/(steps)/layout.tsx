@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "../globals.css";
 import Image from "next/image";
 import Link from "next/link";
-import Head from "next/head";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -30,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+   <>
       <body className={inter.className}>
         <a href="/">
           <header className="p-4">
@@ -147,6 +146,6 @@ export default function RootLayout({
         </div>
       </body>
       <GoogleAnalytics gaId="G-VR7WPMDJXQ" />
-    </html>
+    </>
   );
 }

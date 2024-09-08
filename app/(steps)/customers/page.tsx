@@ -201,7 +201,7 @@ Ideal Customers: "${customersText}."`;
                   <br />
                 </p>
               </div>
-              <p className="text-white">
+              <div className="text-white">
                 <Markdown className="prose prose-sm !max-w-none ">
                   {response.length > 0
                     ? response
@@ -210,7 +210,7 @@ Ideal Customers: "${customersText}."`;
                     ? idea?.customersSummary
                     : ""}
                 </Markdown>
-              </p>
+              </div>
             </div>
 
             <div className="flex justify-between">

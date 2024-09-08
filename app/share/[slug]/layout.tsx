@@ -20,7 +20,7 @@ export const generateMetadata = async (
         description:
           "Shark Puddle business idea pitch platform (demo app for LLMAsAService.io)",
         type: "website",
-        url: `https://shark-puddle.com/${id}`,
+        url: `https://shark-puddle.com/share/${id}`,
         images: 
           "https://shark-puddle.com/sharkpuddlescene.png"
       },

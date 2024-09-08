@@ -1,15 +1,43 @@
 
-import { Metadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
 import "../../globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
-export const metadata: Metadata = {
-  title: "Shark Puddle",
-  description:
-    "Shark Puddle business idea pitch platform (demo app for LLMAsAService.io)",
-};
 
-export default function RootLayout({
+type Props = {
+  params: { id: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+ 
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+
+  const id = params.id
+
+ 
+  // optionally access and extend (rather than replace) parent metadata
+  //const previousImages = (await parent).openGraph?.images || []
+ 
+  return {
+    metadataBase: new URL('https://shark-puddle.com'),
+    title: "Shark Puddle",
+    description:
+      "Shark Puddle business idea pitch platform (demo app for LLMAsAService.io)",
+      openGraph: {
+        title: "Shark Puddle",
+        description:
+          "Shark Puddle business idea pitch platform (demo app for LLMAsAService.io)",
+        type: "website",
+        url: `https://shark-puddle.com/${id}`,
+        images: 
+          "https://shark-puddle.com/sharkpuddlescene.png"
+      },
+  }
+}
+
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;

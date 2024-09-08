@@ -9,19 +9,18 @@ import Head from "next/head";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://shark-puddle.com'),
+  metadataBase: new URL("https://shark-puddle.com"),
   title: "Shark Puddle",
   description:
     "Shark Puddle business idea pitch platform (demo app for LLMAsAService.io)",
-    openGraph: {
-      title: "Shark Puddle",
-      description:
-        "Shark Puddle business idea pitch platform (demo app for LLMAsAService.io)",
-      type: "website",
-      url: "https://shark-puddle.com",
-      images: 
-        "/sharkpuddlescene.png"
-    },
+  openGraph: {
+    title: "Shark Puddle",
+    description:
+      "Shark Puddle business idea pitch platform (demo app for LLMAsAService.io)",
+    type: "website",
+    url: "https://shark-puddle.com",
+    images: "/sharkpuddlescene.png",
+  },
 };
 
 export default function RootLayout({
@@ -29,28 +28,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en">
-     
       <body className="dark">
-
         <a href="/">
           <header className="flex flex-col items-center p-4">
-            
-              <div>
-                <Image
-                  src="/sharkpuddlescene.png"
-                  alt="Shark Puddle Logo"
-                  width={600}
-                  height={400}
-                />
-              </div>
-              <div className="flex flex-col items-center p-4">
-                <h3 className="text-2xl font-bold">Welcome to Shark Puddle</h3>
-                
-              </div>
-            
+            <div>
+              <Image
+                src="/sharkpuddlescene.png"
+                alt="Shark Puddle Logo"
+                width={600}
+                height={400}
+              />
+            </div>
+            <div className="flex flex-col items-center p-4">
+              <h3 className="text-2xl font-bold">Welcome to Shark Puddle</h3>
+            </div>
           </header>
         </a>
 

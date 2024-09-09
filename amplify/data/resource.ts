@@ -10,6 +10,8 @@ const schema = a.schema({
   Idea: a
     .model({
       email: a.string().required(),
+      consent: a.boolean(),
+      consentDate: a.string(),
       name: a.string(),
       idea: a.string(),
       ideaSummary: a.string(),

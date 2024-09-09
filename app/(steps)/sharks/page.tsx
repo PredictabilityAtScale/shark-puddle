@@ -119,7 +119,7 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
         [],
         true,
         !tryAgain,
-        tryAgain ? "d4815650-f41c-421a-ab9c-2201675de892" : null,
+        tryAgain ? process.env.NEXT_PUBLIC_PREMIUM_GROUP_ID : null,
         new AbortController(),
         skepCallback
       );
@@ -165,7 +165,7 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
         [],
         true,
         !tryAgain,
-        tryAgain ? "d4815650-f41c-421a-ab9c-2201675de892" : null,
+        tryAgain ? process.env.NEXT_PUBLIC_PREMIUM_GROUP_ID : null,
         new AbortController(),
         suppCallback
       );
@@ -210,7 +210,7 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
         [],
         true,
         !tryAgain,
-        tryAgain ? "d4815650-f41c-421a-ab9c-2201675de892" : null,
+        tryAgain ? process.env.NEXT_PUBLIC_PREMIUM_GROUP_ID : null,
         new AbortController(),
         conCallback
       );

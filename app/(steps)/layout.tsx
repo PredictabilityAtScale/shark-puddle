@@ -148,6 +148,39 @@ export default function RootLayout({
                     Source code (Github repo)
                   </Link>
                 </li>
+                <li className="mb-2">
+                <div className="flex space-x-4">
+                  <div>Share via: </div>
+                  <Link
+                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+                      "https://shark-puddle.com"
+                    )}`}
+                    className="text-gray-400 hover:text-white"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      width={22}
+                      height={22}
+                      src="/linkedinlogowhite.png"
+                      alt="Share via LinkedIN"
+                    />
+                  </Link>
+
+                  <Link
+                    href="mailto:?subject=Check out Shark Puddle - Business Idea Feedback Tool&body=Check out shark-puddle.com: https://shark-puddle.com"
+                    className="text-gray-400 hover:text-white"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      width={22}
+                      height={22}
+                      src="/emailiconwhite2.png"
+                      alt="Share via email"
+                    />
+                  </Link></div>
+                </li>{" "}
               </ul>
             </nav>
             <div className="w-full md:w-2/3 p-4">{children}</div>

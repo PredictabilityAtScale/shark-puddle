@@ -31,8 +31,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="dark">
-        <a href="/">
-          <header className="flex flex-col items-center p-4">
+        <header className="flex flex-col items-center p-4">
+          <a href="/">
             <div>
               <Image
                 src="/sharkpuddlescene.png"
@@ -44,8 +44,8 @@ export default function RootLayout({
             <div className="flex flex-col items-center p-4">
               <h3 className="text-2xl font-bold">Welcome to Shark Puddle</h3>
             </div>
-          </header>
-        </a>
+          </a>
+        </header>
 
         <div className="flex justify-center w-full">{children}</div>
       </body>

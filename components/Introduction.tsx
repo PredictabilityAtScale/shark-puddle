@@ -79,16 +79,12 @@ const Introduction: React.FC = () => {
 
   return (
     <div className="text-center">
-      <p>
-        Progressively define your business idea and
-        practice your investor pitch, before swimming with the sharks
-      </p>
-      <p>
-        Our intention is to add value (for you) and test our LLM as a Service
-        platform (for us).
-      </p>
-      <p>
-        <br />
+      <p className="">
+        Hone Your Business Idea and Perfect Your Pitch Before Diving into the
+        Deep End.<br/> At Shark Puddle, we help you shape your business concept and
+        refine your investor pitch so you&#39;re ready to impress when it&#39;s
+        time to face the sharks.
+        <br /><br/>
         Let&#39;s get started! First I need an email address to associate with
         your business plan.
       </p>

@@ -53,12 +53,15 @@ ${idea.valueSummary}
 
 ## Shark Critiques
 
+![Skeptical Shark](skepshark88.png)
 ### Skeptical Shark Says
 ${idea.skepticalShark}
 
+![Supportive Shark](supportiveshark88.png)
 ### Supportive Shark Says
 ${idea.supportiveShark}
 
+![Constructive Shark](constructiveshark88.png)
 ### Constructive Shark Says
 ${idea.constructiveShark}
 

@@ -36,7 +36,7 @@ export default function Layout({
   return (
     <>
       <div className="flex justify-center w-full">{children}</div>
-      <GoogleAnalytics gaId="G-VR7WPMDJXQ" />
+      <GoogleAnalytics gaId={`${process.env.NEXT_PUBLIC_GTAG}`} />
     </>
   );
 }

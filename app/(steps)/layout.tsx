@@ -154,7 +154,7 @@ export default function RootLayout({
           </div>
         </div>
       </body>
-      <GoogleAnalytics gaId="G-VR7WPMDJXQ" />
+      <GoogleAnalytics gaId={`${process.env.NEXT_PUBLIC_GTAG}`} />
     </>
   );
 }

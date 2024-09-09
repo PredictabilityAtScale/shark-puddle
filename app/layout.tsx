@@ -49,7 +49,7 @@ export default function RootLayout({
 
         <div className="flex justify-center w-full">{children}</div>
       </body>
-      <GoogleAnalytics gaId="G-VR7WPMDJXQ" />
+      <GoogleAnalytics gaId={`${process.env.NEXT_PUBLIC_GTAG}`} />
     </html>
   );
 }

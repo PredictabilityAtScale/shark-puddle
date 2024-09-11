@@ -54,9 +54,7 @@ const Page: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    const prompt = `An entrepreneur is pitching you a business idea (refer to them in the first person "you"). You have asked them to explain their idea which is included below. 
-    Summarize their idea in 1-3 sentences and end with a "You are like [product or company] but for [new idea purpose]." (if one wasn&#39;t given to you). 
-    Do not add any preamble, or other response; JUST summarize and restate their idea.
+    const prompt = `{{summarize_idea}}
     
     Idea: "${ideaText}."`;
 

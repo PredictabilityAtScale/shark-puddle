@@ -67,31 +67,7 @@ const Page: React.FC = () => {
   };
 
   const doPlan = async () => {
-    const prompt = `An entrepreneur is pitching you a business idea (refer to them in the first person "you"). 
-    You have a summary of their idea (given below), and are now going to suggest a short plan of 3 parts in plain text (no markdown formatting). 
-    
-    1. Make a list of 5 customer segments this idea might appeal to (in order of likely revenue) with a short unique value proposition for each segment.
-    2. Make a list of 5 potential competitors.
-    3. Make a list of 5 assumptions that need to be true for this idea to be successful
-    
-    Answer in plain text (no markdown) in the following format:
-
-    Customers and Unique Value Propositions:
-    1. [Customer Segment 1]: 
-       [Value Proposition 1]
-    2. [Customer Segment 2]: 
-       [Value Proposition 2]
-    ...
-
-    Competitors:
-    1. [Competitor 1]
-    2. [Competitor 2]
-    ...
-
-    Assumptions:
-    1. [Assumption 1]
-    2. [Assumption 2]
-    ...
+    const prompt = `{{create_basic_plan}}
 
 Entrepreneur's Idea: "${idea?.ideaSummary}."
 `;

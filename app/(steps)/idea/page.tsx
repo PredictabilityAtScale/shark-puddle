@@ -76,7 +76,7 @@ const Page: React.FC = () => {
 
   const handleSillyIdea = async () => {
     const idea = await send(
-      "Create me a silly random idea for a business. I want it to be sort of viable, but ultimately foolish.",
+      "{{create_silly_idea}}",
       [],
       false,
       false

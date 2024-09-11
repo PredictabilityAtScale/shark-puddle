@@ -22,6 +22,7 @@ const schema = a.schema({
       skepticalShark: a.string(),
       supportiveShark: a.string(),
       constructiveShark: a.string(),
+      plan: a.string(),
     })
     .secondaryIndexes((index) => [index("email")])
     .authorization(allow => [allow.guest()]),

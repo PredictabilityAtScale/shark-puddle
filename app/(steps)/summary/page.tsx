@@ -45,11 +45,8 @@ const Page: React.FC = () => {
 ## Idea Summary
 ${idea.ideaSummary}
     
-## Customers and Competitors
-${idea.customersSummary}
-
-## Value Proposition
-${idea.valueSummary}
+## Plan Details
+${idea.plan}
 
 ## Shark Critiques
 

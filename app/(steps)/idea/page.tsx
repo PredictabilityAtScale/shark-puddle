@@ -71,7 +71,7 @@ const Page: React.FC = () => {
         response && response.length > 0 ? response : idea?.ideaSummary,
     });
 
-    router.push("/customers");
+    router.push("/plan");
   };
 
   const handleSillyIdea = async () => {

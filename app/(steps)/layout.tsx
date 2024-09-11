@@ -74,18 +74,10 @@ export default function RootLayout({
                 </li>
                 <li className="mb-2">
                   <Link
-                    href="/customers"
+                    href="/plan"
                     className="text-gray-400 hover:text-white"
                   >
-                    2. Customers & competitors
-                  </Link>
-                </li>
-                <li className="mb-2">
-                  <Link
-                    href="/value"
-                    className="text-gray-400 hover:text-white"
-                  >
-                    3. Unique value prop
+                    2. The Plan 
                   </Link>
                 </li>
 
@@ -94,7 +86,7 @@ export default function RootLayout({
                     href="/sharks"
                     className="text-gray-400 hover:text-white"
                   >
-                    4. Shark critiques
+                    3. Shark Puddle Arena
                   </Link>
                 </li>
 
@@ -103,7 +95,7 @@ export default function RootLayout({
                     href="/summary"
                     className="text-gray-400 hover:text-white"
                   >
-                    5. Summary & Share your pitch
+                    4. Summary & Share your pitch
                   </Link>
                 </li>
               </ul>

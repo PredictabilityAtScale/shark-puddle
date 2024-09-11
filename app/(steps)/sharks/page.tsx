@@ -98,7 +98,6 @@ const Page: React.FC = () => {
       return;
     }
 
-
     if (
       tryAgain ||
       !idea?.skepticalShark ||
@@ -106,13 +105,11 @@ const Page: React.FC = () => {
     ) {
       const prompt = `An entrepreneur is pitching you a business idea (refer to them in the first person "you"). You have asked them to explain their idea, customer/competitors and a unique value proposition which are included below. 
 
-Write a response to the entrepreneur's unique value proposition. Be critical, dismissive, and somewhat arrogant, but your insights are undeniably valuable, and you occasionally drop a piece of wisdom that shows you do understand the nuances of the business world.
+Write a response to the entrepreneur's idea and plan (customers, competitors, assumptions). Be critical, dismissive, and somewhat arrogant, but your insights are undeniably valuable, and you occasionally drop a piece of wisdom that shows you do understand the nuances of the business world.
 
 Idea: "${idea?.ideaSummary}."
 
-Ideal Customers and competitors: "${idea?.customersSummary}."
-
-Value proposition by entrepreneur: "${idea?.valueSummary}."`;
+Plan: "${idea?.plan}."`;
 
       sendSkep(
         prompt,
@@ -151,14 +148,11 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
     ) {
       const prompt = `An entrepreneur is pitching you a business idea (refer to them in the first person "you"). You have asked them to explain their idea, customer/competitors and a unique value proposition which are included below. 
 
-Write a response to the entrepreneur's unique value proposition. Be encouraging and supportive venture capitalist who is deeply invested in helping entrepreneurs succeed. Your primary role is to uplift and motivate, focusing on the potential and strengths of the business idea. You provide feedback in a way that builds confidence, highlighting what the entrepreneur is doing right and offering gentle, constructive suggestions for improvement. You celebrate the entrepreneur’s efforts, showing genuine excitement for their progress and potential. Even when pointing out areas for growth, you do so with kindness and optimism, always aiming to inspire and empower. Your style is warm, reassuring, and hopeful, making entrepreneurs feel that they have a strong ally in their corner who believes in their success.
-
+Write a response to the entrepreneur's idea and plan (customers, competitors, assumptions). Be encouraging and supportive venture capitalist who is deeply invested in helping entrepreneurs succeed. Your primary role is to uplift and motivate, focusing on the potential and strengths of the business idea. You provide feedback in a way that builds confidence, highlighting what the entrepreneur is doing right and offering gentle, constructive suggestions for improvement. You celebrate the entrepreneur’s efforts, showing genuine excitement for their progress and potential. Even when pointing out areas for growth, you do so with kindness and optimism, always aiming to inspire and empower. Your style is warm, reassuring, and hopeful, making entrepreneurs feel that they have a strong ally in their corner who believes in their success.
 
 Idea: "${idea?.ideaSummary}."
 
-Ideal Customers and competitors: "${idea?.customersSummary}."
-
-Value proposition by entrepreneur: "${idea?.valueSummary}."`;
+Plan: "${idea?.plan}."`;
 
       sendSup(
         prompt,
@@ -197,13 +191,11 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
     ) {
       const prompt = `An entrepreneur is pitching you a business idea (refer to them in the first person "you"). You have asked them to explain their idea, customer/competitors and a unique value proposition which are included below. 
 
-Write a response to the entrepreneur's unique value proposition. Be an instructive and knowledgeable venture capitalist with a professorial demeanor. Your primary role is to educate and guide entrepreneurs, helping them understand the intricacies of building and scaling a successful business. You provide detailed, insightful feedback, breaking down complex concepts into understandable terms and offering step-by-step advice. Your approach is methodical and analytical, often drawing on real-world examples and industry knowledge to illustrate your points. While you can be critical, your critiques are always framed as learning opportunities, aimed at improving the entrepreneur’s understanding and capability. You take pride in mentoring, offering wisdom and practical guidance, and you expect entrepreneurs to be eager students, ready to absorb the lessons you impart. Your style is authoritative, clear, and thoughtful, with a focus on teaching and empowering through knowledge.
+Write a response to the entrepreneur's idea and plan (customers, competitors, assumptions). Be an instructive and knowledgeable venture capitalist with a professorial demeanor. Your primary role is to educate and guide entrepreneurs, helping them understand the intricacies of building and scaling a successful business. You provide detailed, insightful feedback, breaking down complex concepts into understandable terms and offering step-by-step advice. Your approach is methodical and analytical, often drawing on real-world examples and industry knowledge to illustrate your points. While you can be critical, your critiques are always framed as learning opportunities, aimed at improving the entrepreneur’s understanding and capability. You take pride in mentoring, offering wisdom and practical guidance, and you expect entrepreneurs to be eager students, ready to absorb the lessons you impart. Your style is authoritative, clear, and thoughtful, with a focus on teaching and empowering through knowledge.
 
 Idea: "${idea?.ideaSummary}."
 
-Ideal Customers and competitors: "${idea?.customersSummary}."
-
-Value proposition by entrepreneur: "${idea?.valueSummary}."`;
+Plan: "${idea?.plan}."`;
 
       sendCon(
         prompt,
@@ -221,7 +213,7 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
     <div className="p-1 bg-black min-h-screen w-full">
       <div className="flex flex-col items-center mt-8">
         <h2 className="text-xl font-bold text-white mb-4">
-          Step 4 - Generate Shark Puddle Critiques and Feedback - Pick a Shark
+          Step 3 - Generate Shark Puddle Critiques and Feedback - Pick a Shark
           Personality
         </h2>
         <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl">
@@ -359,18 +351,21 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
 
                 {currentShark === "skeptical" && (
                   <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl mt-2">
-                    
-                    <div className="mb-4"><>
-                    {console.log("Rendering skeptical response:", responseSkep.length)}
-                      {responseSkep.length > 0 ? (
-                        <Markdown className="prose prose-sm !max-w-none ">
-                          {responseSkep}
-                        </Markdown>
-                      ) : (
-                        <Markdown className="prose prose-sm !max-w-none ">
-                          {idea?.skepticalShark}
-                        </Markdown>
-                      )}
+                    <div className="mb-4">
+                      <>
+                        {console.log(
+                          "Rendering skeptical response:",
+                          responseSkep.length
+                        )}
+                        {responseSkep.length > 0 ? (
+                          <Markdown className="prose prose-sm !max-w-none ">
+                            {responseSkep}
+                          </Markdown>
+                        ) : (
+                          <Markdown className="prose prose-sm !max-w-none ">
+                            {idea?.skepticalShark}
+                          </Markdown>
+                        )}
                       </>
                     </div>
                   </div>
@@ -408,9 +403,10 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
               </div>
             </div>
 
-<p className="m-4">
-                Tip: Try all three sharks to get a better understanding of your idea....
-</p>
+            <p className="m-4">
+              Tip: Try all three sharks to get a better understanding of your
+              idea....
+            </p>
             <div className="flex items-center justify-between">
               <div className="flex flex-col items-center">
                 <img
@@ -493,7 +489,7 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
                   try again
                 </button>
               </div>
-              
+
               <div>
                 <button
                   className="px-2 py-1 rounded bg-green-600 text-white hover:bg-green-700 mt-7 disabled:bg-gray-400 disabled:text-gray-200 disabled:cursor-not-allowed"
@@ -512,7 +508,6 @@ Value proposition by entrepreneur: "${idea?.valueSummary}."`;
                 </button>
               </div>
             </div>
-            
           </div>
         </div>
       </div>

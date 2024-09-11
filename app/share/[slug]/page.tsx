@@ -54,11 +54,8 @@ const Page: React.FC<{ params: { slug: string } }> = ({ params }) => {
 ## Idea Summary
 ${idea.ideaSummary}
     
-## Customers and Competitors
-${idea.customersSummary}
-
-## Value Proposition
-${idea.valueSummary}
+## Plan Details
+${idea.plan}
 
 ## Shark Critiques
 

@@ -180,7 +180,7 @@ const Page: React.FC = () => {
                 className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 mr-2"
                 onClick={handleConfirm}
               >
-                Yes, that&apos;s it &gt;
+                Yes, build my pitch
               </button>
               No, let me try again (edit you idea above and click Submit again)
             </div>

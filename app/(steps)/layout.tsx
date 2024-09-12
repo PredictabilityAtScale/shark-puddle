@@ -44,7 +44,7 @@ export default function RootLayout({
               <div>
                 <h3 className="text-2xl font-bold">Welcome to Shark Puddle</h3>
                 <p className="text-lg text-gray-600">
-                  pitch your business idea to a friendly (or not) investors
+                  pitch your business idea to friendly (or not) investors
                   <br />
                   Just like Shark Tank but way more fun and interactive
                 </p>
@@ -77,7 +77,7 @@ export default function RootLayout({
                     href="/plan"
                     className="text-gray-400 hover:text-white"
                   >
-                    2. The Plan 
+                    2. The Pitch 
                   </Link>
                 </li>
 

@@ -66,13 +66,18 @@ const Page: React.FC = () => {
     setPlanText(event.target.value);
   };
 
-  const doPlan = async () => {
+  const doPlan = async (tryAgain:boolean = false) => {
     const prompt = `{{create_basic_plan}}
 
 Entrepreneur's Idea: "${idea?.ideaSummary}."
 `;
 
-    send(prompt, [],);
+    send(prompt,
+      [],
+      true,
+      !tryAgain,
+      tryAgain ? process.env.NEXT_PUBLIC_PREMIUM_GROUP_ID : null,
+    );
   };
 
   const handleConfirm = async () => {
@@ -88,7 +93,7 @@ Entrepreneur's Idea: "${idea?.ideaSummary}."
     <div className="p-1 bg-black min-h-screen w-full">
       <div className="flex flex-col items-center mt-8">
         <h2 className="text-xl font-bold text-white mb-4">
-          Step 2 - Flesh Out Your Plan
+          Step 2 - Create Your Pitch
         </h2>
         <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-6xl">
           <div className="mb-4">
@@ -132,12 +137,12 @@ Entrepreneur's Idea: "${idea?.ideaSummary}."
               className={`px-3 py-1 mr-2 rounded hover:bg-blue-700 ${
                 !idle || (planText.length === 0 && response.length === 0)
                   ? "bg-gray-400 text-gray-700 cursor-not-allowed"
-                  : "bg-blue-600 text-white hover:bg-yellow-700"
+                  : "bg-green-600 text-white hover:bg-green-700"
               }`}
               onClick={handleConfirm}
               disabled={!idle || (planText.length === 0 && response.length === 0)}
             >
-              Submit
+              Pitch to the sharks
             </button>
             <button
               className={`px-3 py-1 mr-2 rounded hover:bg-blue-700 ${
@@ -147,7 +152,7 @@ Entrepreneur's Idea: "${idea?.ideaSummary}."
               }`}
               onClick={() => {
                 setPlanText("");
-                doPlan();
+                doPlan(true);
               }}
               disabled={!idle}
             >

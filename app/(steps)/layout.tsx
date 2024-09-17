@@ -73,11 +73,8 @@ export default function RootLayout({
                   </Link>
                 </li>
                 <li className="mb-2">
-                  <Link
-                    href="/plan"
-                    className="text-gray-400 hover:text-white"
-                  >
-                    2. The Pitch 
+                  <Link href="/plan" className="text-gray-400 hover:text-white">
+                    2. The Pitch
                   </Link>
                 </li>
 
@@ -141,38 +138,55 @@ export default function RootLayout({
                   </Link>
                 </li>
                 <li className="mb-2">
-                <div className="flex space-x-4">
-                  <div>Share via: </div>
-                  <Link
-                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-                      "https://shark-puddle.com"
-                    )}`}
-                    className="text-gray-400 hover:text-white"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Image
-                      width={22}
-                      height={22}
-                      src="/linkedinlogowhite.png"
-                      alt="Share via LinkedIN"
-                    />
-                  </Link>
+                  <div className="flex space-x-4">
+                    <div>Share via: </div>
+                    <Link
+                      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+                        "https://shark-puddle.com"
+                      )}`}
+                      className="text-gray-400 hover:text-white"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Image
+                        width={22}
+                        height={22}
+                        src="/linkedinlogowhite.png"
+                        alt="Share via LinkedIN"
+                      />
+                    </Link>
 
-                  <Link
-                    href="mailto:?subject=Check out Shark Puddle - Business Idea Feedback Tool&body=Check out shark-puddle.com: https://shark-puddle.com"
-                    className="text-gray-400 hover:text-white"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Image
-                      width={22}
-                      height={22}
-                      src="/emailiconwhite2.png"
-                      alt="Share via email"
-                    />
-                  </Link></div>
+                    <Link
+                      href="mailto:?subject=Check out Shark Puddle - Business Idea Feedback Tool&body=Check out shark-puddle.com: https://shark-puddle.com"
+                      className="text-gray-400 hover:text-white"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Image
+                        width={22}
+                        height={22}
+                        src="/emailiconwhite2.png"
+                        alt="Share via email"
+                      />
+                    </Link>
+                  </div>
                 </li>{" "}
+                <li className="mb-2">
+                  <div className="mt-4">
+                    <a
+                      href="https://www.producthunt.com/posts/shark-puddle?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-shark&#0045;puddle"
+                      target="_blank"
+                    >
+                      <img
+                        src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=489253&theme=neutral"
+                        alt="Shark&#0032;Puddle - Pitch&#0032;your&#0032;business&#0047;startup&#0032;idea&#0032;to&#0032;a&#0032;panel&#0032;of&#0032;Puddle&#0032;Sharks | Product Hunt"
+                        style={{ width: "250px", height: "54px" }}
+                        width="250"
+                        height="54"
+                      />
+                    </a>
+                  </div>
+                </li>
               </ul>
             </nav>
             <div className="w-full md:w-2/3 p-4">{children}</div>
